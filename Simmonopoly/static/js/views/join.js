@@ -4,6 +4,17 @@
  *WebSocket Interface
  */
 
+/*const receivedMessage = {
+    action: "join" | "start",
+    data: [{
+        id: "user_id",
+        name: "user_name",
+        avatar: "user_url"
+    }]
+};
+const sentMessage = {
+    action: "start"
+};*/
 
 class JoinView {
     constructor() {

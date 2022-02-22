@@ -22,6 +22,115 @@ class BoardController {
         });
     }
 
+    drawPlayers(number, initPos) {
+        let promiseList = [];
+        return new Promise((resolve => {
+            for (let i = 0; i < number; i++) {
+                let player = new Player({
+                    index: i,
+                    modelUrl: `${this.assetsUrl}/players/${i}/model.json`,
+                    scene: this.scene,
+                    initTileId: initPos[i],
+                    initPos: this.boardToWorld({
+                        tileId: initPos[i],
+                        type: BoardController.MODEL_PLAYER,
+                        total: number,
+                        index: i
+                    }),
+                });
+
+                this.board.updateTileInfo(initPos[i], {
+                    type: BoardController.MODEL_PLAYER,
+                    action: "add",
+                    playerIndex: i
+                });
+                this.players.push(player);
+                promiseList.push(player.load());
+            }
+
+            Promise.all(promiseList).then(() => {
+                resolve();
+            })
+        }))
+    }
+
+    movePlayer(index, newTileId) {
+        let currTileId = this.players[index].getTileId();
+        console.log("index and new tile id is: " + currTileId.toString() + " " + newTileId.toString());
+
+        // Remove previous player position
+        this.board.updateTileInfo(currTileId, {
+            type: BoardController.MODEL_PLAYER,
+            action: "remove",
+            playerIndex: index
+        });
+
+        // Register new player position
+        this.board.updateTileInfo(newTileId, {
+            type: BoardController.MODEL_PLAYER,
+            action: "add",
+            playerIndex: index
+        });
+
+        // Animation: move the player
+        return new Promise((resolve => {
+            let playerMovementInterval = setInterval(() => {
+                currTileId += 1;
+                currTileId %= BoardController.TILE_MAX + 1;
+                const tileInfo = this.board.getTileInfo(currTileId);
+                const tilePlayerCount = tileInfo.players.reduce((a, b) => a + b, 0);
+
+                this.players[index].advanceTo(currTileId, this.boardToWorld({
+                    tileId: currTileId,
+                    type: BoardController.MODEL_PLAYER,
+                    total: tilePlayerCount + 1,
+                    index: tilePlayerCount
+                }));
+
+                if (currTileId === newTileId) {
+                    clearInterval(playerMovementInterval);
+                    resolve();
+                }
+            }, 200);
+        }));
+    }
+
+    addProperty(type, tileId) {
+        let tileInfo = this.board.getTileInfo(tileId);
+        const tilePropertyCount = tileInfo.propertyManager.getPropertyCount();
+
+        if (type === PropertyManager.PROPERTY_HOUSE) {
+            tileInfo.propertyManager.buildHouse(this.boardToWorld({
+                tileId: tileId,
+                type: BoardController.MODEL_PROPERTY,
+                total: tilePropertyCount + 2
+            }), tileId);
+        } else if (type === PropertyManager.PROPERTY_HOTEL) {
+            tileInfo.propertyManager.buildHotel(this.boardToWorld({
+                tileId: tileId,
+                type: BoardController.MODEL_PROPERTY,
+                total: 2
+            }), tileId);
+        }
+    }
+
+    addLandMark(playerIndex, tileId) {
+        let tileInfo = this.board.getTileInfo(tileId);
+        this.board.updateTileInfo(tileId, {
+            type: BoardController.MODEL_PROPERTY,
+            options: {
+                loadedHouseJson: this.houseModelJson,
+                loadedHotelJson: this.hotelModelJson,
+                scene: this.scene
+            }
+        });
+
+        tileInfo.propertyManager.buyLand(this.boardToWorld({
+            tileId: tileId,
+            type: BoardController.MODEL_PROPERTY,
+            total: 1
+        }), tileId, playerIndex);
+    }
 
     initEngine() {
         let viewWidth = this.containerEl.offsetWidth;
