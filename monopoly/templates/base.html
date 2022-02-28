@@ -10,6 +10,15 @@
 </head>
 <body>
 {% csrf_token %}
+<div id="nav-bar">
+<div id="profile_image">
+	<input id="user-name" value="{{ user.name }}" hidden>
+	<input id="user-avatar" value="{{ user.avatar.url }}" hidden>
+	<a href="/profile/{{ user.name }}" target="_blank">
+            <img id="user-avatar" src="{{ user.avatar }}">
+        </a>
+</div>
+</div>
 <div id="page-container" class="center">
     {% block content %}{% endblock %}
 </div>
