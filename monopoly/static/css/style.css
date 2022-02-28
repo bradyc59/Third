@@ -91,9 +91,6 @@ td {
 	display: none;
 }
 
-#noscript {
-	margin-left: 10px;
-}
 
 #board {
 	display: none;
@@ -105,7 +102,6 @@ td {
 }
 
 #jail {
-	border: 1px solid black;
 	height: 65px;
 	width: 65px;
 	position: relative;
@@ -611,10 +607,214 @@ td {
 	padding-left: 0;
 }
 
-#cell1 {
-	background-image: url("static/images/tiles/1.png")
+#cell1img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
 }
 
+#cell2img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell3img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell4img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell5img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell6img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell7img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell8img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell9img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell10img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell11img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell12img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell13img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell14img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell15img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell16img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell17img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell18img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell19img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell20img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell21img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell22img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell23img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell24img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell25img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell26img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell27img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell28img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell29img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell30img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell31img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell32img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell33img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell34img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell35img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell36img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell37img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell38img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+#cell39img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
 .cell {
 	position: relative;
 	top: 0px;
@@ -790,11 +990,9 @@ td {
 }
 
 .cell-name {
-	position: absolute;
-	bottom: 0px;
-	left: 0px;
-	text-align: center;
-	width: 100%;
+	text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .cell-position-holder {
