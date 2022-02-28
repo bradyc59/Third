@@ -97,7 +97,7 @@ td {
 
 #board {
 	display: none;
-    background-color: #bcf5f5;
+    background-color: #CCE7CF;
 	border: 2px solid black;
 	border-spacing: 3px;
 	margin: 25px;
@@ -291,7 +291,7 @@ td {
 	background-color: #305BC9;
 	/* background-image: -webkit-linear-gradient(bottom,#213EB2,#4787ED);
 	background-image: -moz-linear-gradient(bottom,#213EB2,#4787ED); */
-	background-image: url(images/menu_background.png);
+	background-image: url(static/images/menu_background.png);
 	/* background-repeat: repeat-x; */
 	overflow: hidden;
 }
@@ -603,6 +603,16 @@ td {
 	height: 19px;
 	vertical-align: middle;
 	float: right;
+}
+
+#cell0img {
+	position: absolute;
+	left: 0;
+	padding-left: 0;
+}
+
+#cell1 {
+	background-image: url("static/images/tiles/1.png")
 }
 
 .cell {
