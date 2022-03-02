@@ -35,6 +35,7 @@ function Card(text, action) {
 }
 
 
+
 function utiltext() {
 	return '&nbsp;&nbsp;&nbsp;&nbsp;If one "Utility" is owned rent is 4 times amount shown on dice.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;If both "Utilitys" are owned rent is 10 times amount shown on dice.';
 }
@@ -43,18 +44,18 @@ function transtext() {
 	return '<div style="font-size: 14px; line-height: 1.5;">Rent<span style="float: right;">$25.</span><br />If 2 Railroads are owned<span style="float: right;">50.</span><br />If 3 &nbsp; &nbsp; " &nbsp; &nbsp; " &nbsp; &nbsp; "<span style="float: right;">100.</span><br />If 4 &nbsp; &nbsp; " &nbsp; &nbsp; " &nbsp; &nbsp; "<span style="float: right;">200.</span></div>';
 }
 
-function luxurytax() {
-	addAlert(player[turn].name + " paid $100 for landing on Luxury Tax.");
+function studentlevy() {
+	addAlert(player[turn].name + " paid $100 for landing on Student Levy.");
 	player[turn].pay(100, 0);
 
-	$("#landed").show().text("You landed on Luxury Tax. Pay $100.");
+	$("#landed").show().text("You landed on Student Levy. Pay $100.");
 }
 
-function citytax() {
-	addAlert(player[turn].name + " paid $200 for landing on City Tax.");
+function studentfees() {
+	addAlert(player[turn].name + " paid $200 for landing on Student Fees.");
 	player[turn].pay(200, 0);
 
-	$("#landed").show().text("You landed on City Tax. Pay $200.");
+	$("#landed").show().text("You landed on Student Fees. Pay $200.");
 }
 
 var square = [];
@@ -137,7 +138,6 @@ chanceCards[12] = new Card("Your crypto investment matures. Collect $150.", func
 chanceCards[13] = new Card("Advance to the nearest railroad. If UNOWNED, you may buy it from the Bank. If OWNED, pay owner twice the rental to which they are otherwise entitled.", function() { advanceToNearestRailroad();});
 chanceCards[14] = new Card("Advance to Larkfield. If you pass \"GO\" collect $200.", function() { advance(11);});
 chanceCards[15] = new Card("Go to Jail. Go Directly to Jail. Do not pass \"GO\". Do not collect $200.", function() { gotojail();});
-
 
 function Game() {
 	var die1;
@@ -2519,9 +2519,9 @@ function land(increasedRent) {
 		document.getElementById("landed").innerHTML = "You landed on " + s.name + ". Property is mortgaged; no rent was collected.";
 	}
 
-	// City Tax
+
 	if (p.position === 4) {
-		citytax();
+		studentfees();
 	}
 
 	// Go to jail. Go directly to Jail. Do not pass GO. Do not collect $200.
@@ -2538,9 +2538,9 @@ function land(increasedRent) {
 		return;
 	}
 
-	// Luxury Tax
+
 	if (p.position === 38) {
-		luxurytax();
+		studentlevy();
 	}
 
 	updateMoney();
@@ -2767,7 +2767,7 @@ function setup() {
 			p.human = true;
 		} else if (document.getElementById("player" + i + "ai").value === "1") {
 			p.human = false;
-			p.AI = new AITest(p);
+			p.AI = new AI(p);
 		}
 	}
 
@@ -2876,7 +2876,7 @@ window.onload = function() {
 		square[i].index = i;
 	}
 
-	AITest.count = 0;
+	AI.count = 0;
 
 	player[1].human = true;
 	player[0].name = "the bank";
@@ -2954,7 +2954,16 @@ window.onload = function() {
 
 
 
-	
+	// Jail corrections
+	$("<div>", {id: "jailpositionholder" }).appendTo("#jail");
+	$("<span>").text("Jail").appendTo("#jail");
+
+	document.getElementById("jail").enlargeId = "enlarge40";
+
+	document.getElementById("enlarge-wrap").innerHTML += "<div id='enlarge40' class='enlarge'><div id='enlarge40color' class='enlarge-color'></div><br /><div id='enlarge40name' class='enlarge-name'>Jail</div><br /><div id='enlarge40price' class='enlarge-price'></div><br /><div id='enlarge40token' class='enlarge-token'></div></div>";
+
+	document.getElementById("enlarge40name").innerHTML = "Jail";
+
 	// Create event handlers for hovering and draging.
 
 	var drag, dragX, dragY, dragObj, dragTop, dragLeft;

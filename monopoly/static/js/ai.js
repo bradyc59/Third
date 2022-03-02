@@ -1,11 +1,11 @@
 // The purpose of this AI is not to be a relistic opponant, but to give an example of a vaild AI player.
-function AITest(p) {
+function AI(p) {
 	this.alertList = "";
 
 	// This variable is static, it is not related to each instance.
 	this.constructor.count++;
 
-	p.name = "AI Test " + this.constructor.count;
+	p.name = "AI " + this.constructor.count;
 
 	// Decide whether to buy a property the AI landed on.
 	// Return: boolean (true to buy).
