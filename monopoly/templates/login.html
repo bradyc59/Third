@@ -8,7 +8,6 @@
 
 {% block content %}
     <input id="user-name" value="{{ user.name }}" hidden>
-    <input id="host-name" value="{{ host_name }}" hidden>
 <div id="login-container" class="card">
     <div class="card-blur-container">
         <div class="card-blur"></div>
@@ -20,12 +19,7 @@
             {% if error %}
                 <span id="login-error" class="card"> {{error}} </span>
             {% endif %}
-            {% if active_page == "register" %}
-            <div id="login-name-group">
-                <input name="firstname" id="login-first-name" placeholder="First Name"/>
-                <input name="lastname" id="login-last-name" placeholder="Last Name"/>
-            </div>
-            {% endif %}
+
             <input name="username" id="login-user-name" value="{{ user.name}}" placeholder="User Name"/>
             <input name="password" type="password" id="login-password" placeholder="Password"/>
             <button type="submit" id="login-submit" class="large-button">Login</button>
