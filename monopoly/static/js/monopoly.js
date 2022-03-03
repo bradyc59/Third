@@ -384,27 +384,112 @@ function Game() {
 	var currentTrader;
 	var currentReciever;
 
-
-	var tradeMoneyOnChange = function(e) {
+	this.trade = function(tradeObj) {
+		$("#board").hide();
+		$("#control").hide();
+		$("#trade").show();
 		$("#proposetradebutton").show();
 		$("#canceltradebutton").show();
 		$("#accepttradebutton").hide();
 		$("#rejecttradebutton").hide();
 
-		var amount = this.value;
+		if (tradeObj instanceof Trade) {
+			writeTrade(tradeObj);
+			this.proposeTrade();
+		} else {
+			var trader = player[turn];
+			var reciever = turn === 1 ? player[2] : player[1];
 
-		amount = Math.round(amount) || 0;
-		this.value = amount;
+			currentTrader = trader;
+			currentReciever = reciever;
 
-		return true;
+			resetTrade(trader, reciever, true);
+		}
 	};
 
-	var tradeleftplayermoney = document.getElementById("trade-leftp-money")
-	var traderightplayermoney = document.getElementById("trade-rightp-money")
+	this.proposeTrade = function() {
+		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+		var traderightplayermoney = document.getElementById("trade-rightp-money")
 
-	tradeleftplayermoney.onchange = tradeMoneyOnChange;
-	traderightplayermoney.onchange = tradeMoneyOnChange;
+		if (isNaN(tradeleftplayermoney.value)) {
+			tradeleftplayermoney.value = "This value must be a number.";
+			tradeleftplayermoney.style.color = "red";
+			return false;
+		}
 
+		if (isNaN(traderightplayermoney.value)) {
+			traderightplayermoney.value = "This value must be a number.";
+			traderightplayermoney.style.color = "red";
+			return false;
+		}
+
+		var tradeObj = readTrade();
+		var money = tradeObj.getMoney();
+		var trader = tradeObj.getTrader();
+		var reciever = tradeObj.getReciever();
+		var reversedTradeProperty = [];
+
+		if (money > 0 && money > trader.money) {
+			tradeleftplayermoney.value = trader.name + " does not have $" + money + ".";
+			tradeleftplayermoney.style.color = "red";
+			return false;
+		}
+		else if (money < 0 && -money > reciever.money) {
+			traderightplayermoney.value = reciever.name + " does not have $" + (-money) + ".";
+			traderightplayermoney.style.color = "red";
+			return false;
+		}
+
+		var isAPropertySelected = 0;
+
+		// Ensure that some properties are selected.
+		for (var i = 0; i < 40; i++) {
+			reversedTradeProperty[i] = -tradeObj.getProperty(i);
+			isAPropertySelected |= tradeObj.getProperty(i);
+		}
+
+		if (isAPropertySelected === 0) {
+			popup("<p>One or more properties must be selected in order to trade.</p>");
+
+			return false;
+		}
+
+		if (trader.human && !confirm(trader.name + ", are you sure you want to make this offer to " + reciever.name + "?")) {
+			return false;
+		}
+
+		var reversedTrade = new Trade(reciever, trader, -money, reversedTradeProperty, -tradeObj.getCommunityChestJailCard(), -tradeObj.getChanceJailCard());
+
+		if (reciever.human) {
+
+			writeTrade(reversedTrade);
+
+			$("#proposetradebutton").hide();
+			$("#canceltradebutton").hide();
+			$("#accepttradebutton").show();
+			$("#rejecttradebutton").show();
+
+			addAlert(trader.name + " initiated a trade with " + reciever.name + ".");
+			popup("<p>" + trader.name + " has proposed a trade with you, " + reciever.name + ". You may accept, reject, or modify the offer.</p>");
+		} else {
+			var tradeResponse = reciever.AI.acceptTrade(tradeObj);
+
+			if (tradeResponse === true) {
+				popup("<p>" + reciever.name + " has accepted your offer.</p>");
+				this.acceptTrade(reversedTrade);
+			} else if (tradeResponse === false) {
+				popup("<p>" + reciever.name + " has declined your offer.</p>");
+				return;
+			} else if (tradeResponse instanceof Trade) {
+				popup("<p>" + reciever.name + " has proposed a counteroffer.</p>");
+				writeTrade(tradeResponse);
+
+				$("#proposetradebutton, #canceltradebutton").hide();
+				$("#accepttradebutton").show();
+				$("#rejecttradebutton").show();
+			}
+		}
+	};
 
 	var resetTrade = function(trader, reciever, allowRecieverToBeChanged) {
 		var currentSquare;
@@ -515,7 +600,6 @@ function Game() {
 				currentTableCellCheckbox = currentTableCell.appendChild(document.createElement("input"));
 				currentTableCellCheckbox.type = "checkbox";
 				currentTableCellCheckbox.id = "traderightcheckbox" + i;
-				currentTableCellCheckbox.title = "Check this box to include " + currentSquare.name + " in the trade.";
 
 				currentTableCell = currentTableRow.appendChild(document.createElement("td"));
 				currentTableCell.className = "propertycellcolor";
@@ -544,14 +628,9 @@ function Game() {
 		if (traderSideTable.lastChild) {
 			traderProperty.appendChild(traderSideTable);
 		}
-		else {
-			traderProperty.textContent = trader.name + " has no properties to trade.";
-		}
 
 		if (recieverSideTable.lastChild) {
 			recieverProperty.appendChild(recieverSideTable);
-		} else {
-			recieverProperty.textContent = reciever.name + " has no properties to trade.";
 		}
 
 		document.getElementById("trade-leftp-name").textContent = trader.name;
@@ -601,8 +680,7 @@ function Game() {
 		var reciever = currentReciever;
 		var property = new Array(40);
 		var money;
-		var communityChestJailCard;
-		var chanceJailCard;
+
 		for (var i = 0; i < 40; i++) {
 			var tradeleftcheckbox = document.getElementById("tradeleftcheckbox" + i)
 			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
@@ -620,9 +698,7 @@ function Game() {
 		money = parseInt(document.getElementById("trade-leftp-money").value, 10) || 0;
 		money -= parseInt(document.getElementById("trade-rightp-money").value, 10) || 0;
 
-		var trade = new Trade(trader, reciever, money, property, communityChestJailCard, chanceJailCard);
-
-		return trade;
+		return new Trade(trader, reciever, money, property);
 	};
 
 	var writeTrade = function(tradeObj) {
@@ -652,30 +728,6 @@ function Game() {
 		}
 	};
 
-	this.trade = function(tradeObj) {
-		$("#board").hide();
-		$("#control").hide();
-		$("#trade").show();
-		$("#proposetradebutton").show();
-		$("#canceltradebutton").show();
-		$("#accepttradebutton").hide();
-		$("#rejecttradebutton").hide();
-
-		if (tradeObj instanceof Trade) {
-			writeTrade(tradeObj);
-			this.proposeTrade();
-		} else {
-			var trader = player[turn];
-			var reciever = turn === 1 ? player[2] : player[1];
-
-			currentTrader = trader;
-			currentReciever = reciever;
-
-			resetTrade(trader, reciever, true);
-		}
-	};
-
-
 	this.cancelTrade = function() {
 		$("#board").show();
 		$("#control").show();
@@ -688,6 +740,26 @@ function Game() {
 		}
 
 	};
+
+	var tradeMoneyOnChange = function(e) {
+		$("#proposetradebutton").show();
+		$("#canceltradebutton").show();
+		$("#accepttradebutton").hide();
+		$("#rejecttradebutton").hide();
+
+		var amount = this.value;
+
+		amount = Math.round(amount) || 0;
+		this.value = amount;
+
+		return true;
+	};
+
+	var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+	var traderightplayermoney = document.getElementById("trade-rightp-money")
+
+	tradeleftplayermoney.onchange = tradeMoneyOnChange;
+	traderightplayermoney.onchange = tradeMoneyOnChange;
 
 	this.acceptTrade = function(tradeObj) {
 		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
@@ -790,92 +862,6 @@ function Game() {
 		}
 	};
 
-	this.proposeTrade = function() {
-		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
-		var traderightplayermoney = document.getElementById("trade-rightp-money")
-
-		if (isNaN(tradeleftplayermoney.value)) {
-			tradeleftplayermoney.value = "This value must be a number.";
-			tradeleftplayermoney.style.color = "red";
-			return false;
-		}
-
-		if (isNaN(traderightplayermoney.value)) {
-			traderightplayermoney.value = "This value must be a number.";
-			traderightplayermoney.style.color = "red";
-			return false;
-		}
-
-		var tradeObj = readTrade();
-		var money = tradeObj.getMoney();
-		var trader = tradeObj.getTrader();
-		var reciever = tradeObj.getReciever();
-		var reversedTradeProperty = [];
-
-		if (money > 0 && money > trader.money) {
-			tradeleftplayermoney.value = trader.name + " does not have $" + money + ".";
-			tradeleftplayermoney.style.color = "red";
-			return false;
-		}
-		else if (money < 0 && -money > reciever.money) {
-			traderightplayermoney.value = reciever.name + " does not have $" + (-money) + ".";
-			traderightplayermoney.style.color = "red";
-			return false;
-		}
-
-		var isAPropertySelected = 0;
-
-		// Ensure that some properties are selected.
-		for (var i = 0; i < 40; i++) {
-			reversedTradeProperty[i] = -tradeObj.getProperty(i);
-			isAPropertySelected |= tradeObj.getProperty(i);
-		}
-
-		isAPropertySelected |= tradeObj.getCommunityChestJailCard();
-		isAPropertySelected |= tradeObj.getChanceJailCard();
-
-		if (isAPropertySelected === 0) {
-			popup("<p>One or more properties must be selected in order to trade.</p>");
-
-			return false;
-		}
-
-		if (trader.human && !confirm(trader.name + ", are you sure you want to make this offer to " + reciever.name + "?")) {
-			return false;
-		}
-
-		var reversedTrade = new Trade(reciever, trader, -money, reversedTradeProperty, -tradeObj.getCommunityChestJailCard(), -tradeObj.getChanceJailCard());
-
-		if (reciever.human) {
-
-			writeTrade(reversedTrade);
-
-			$("#proposetradebutton").hide();
-			$("#canceltradebutton").hide();
-			$("#accepttradebutton").show();
-			$("#rejecttradebutton").show();
-
-			addAlert(trader.name + " initiated a trade with " + reciever.name + ".");
-			popup("<p>" + trader.name + " has proposed a trade with you, " + reciever.name + ". You may accept, reject, or modify the offer.</p>");
-		} else {
-			var tradeResponse = reciever.AI.acceptTrade(tradeObj);
-
-			if (tradeResponse === true) {
-				popup("<p>" + reciever.name + " has accepted your offer.</p>");
-				this.acceptTrade(reversedTrade);
-			} else if (tradeResponse === false) {
-				popup("<p>" + reciever.name + " has declined your offer.</p>");
-				return;
-			} else if (tradeResponse instanceof Trade) {
-				popup("<p>" + reciever.name + " has proposed a counteroffer.</p>");
-				writeTrade(tradeResponse);
-
-				$("#proposetradebutton, #canceltradebutton").hide();
-				$("#accepttradebutton").show();
-				$("#rejecttradebutton").show();
-			}
-		}
-	};
 
 // bankruptcy, will eliminate player if gone bankrupt, eg. has no money and properties
 	this.eliminatePlayer = function() {
