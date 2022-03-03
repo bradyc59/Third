@@ -541,92 +541,6 @@ function Game() {
 			}
 		}
 
-		if (trader.communityChestJailCard) {
-			currentTableRow = traderSideTable.appendChild(document.createElement("tr"));
-			currentTableRow.onclick = tableRowOnClick;
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcheckbox";
-			currentTableCellCheckbox = currentTableCell.appendChild(document.createElement("input"));
-			currentTableCellCheckbox.type = "checkbox";
-			currentTableCellCheckbox.id = "tradeleftcheckbox40";
-			currentTableCellCheckbox.title = "Check this box to include this Get Out of Jail Free Card in the trade.";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcolor";
-			currentTableCell.style.backgroundColor = "white";
-			currentTableCell.style.borderColor = "grey";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellname";
-
-			currentTableCell.textContent = "Get Out of Jail Free Card";
-		}
-		else if (reciever.communityChestJailCard) {
-			currentTableRow = recieverSideTable.appendChild(document.createElement("tr"));
-			currentTableRow.onclick = tableRowOnClick;
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcheckbox";
-			currentTableCellCheckbox = currentTableCell.appendChild(document.createElement("input"));
-			currentTableCellCheckbox.type = "checkbox";
-			currentTableCellCheckbox.id = "traderightcheckbox40";
-			currentTableCellCheckbox.title = "Check this box to include this Get Out of Jail Free Card in the trade.";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcolor";
-			currentTableCell.style.backgroundColor = "white";
-			currentTableCell.style.borderColor = "grey";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellname";
-
-			currentTableCell.textContent = "Get Out of Jail Free Card";
-		}
-
-		if (trader.chanceJailCard) {
-			currentTableRow = traderSideTable.appendChild(document.createElement("tr"));
-			currentTableRow.onclick = tableRowOnClick;
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcheckbox";
-			currentTableCellCheckbox = currentTableCell.appendChild(document.createElement("input"));
-			currentTableCellCheckbox.type = "checkbox";
-			currentTableCellCheckbox.id = "tradeleftcheckbox41";
-			currentTableCellCheckbox.title = "Check this box to include this Get Out of Jail Free Card in the trade.";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcolor";
-			currentTableCell.style.backgroundColor = "white";
-			currentTableCell.style.borderColor = "grey";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellname";
-
-			currentTableCell.textContent = "Get Out of Jail Free Card";
-		}
-		else if (reciever.chanceJailCard) {
-			currentTableRow = recieverSideTable.appendChild(document.createElement("tr"));
-			currentTableRow.onclick = tableRowOnClick;
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcheckbox";
-			currentTableCellCheckbox = currentTableCell.appendChild(document.createElement("input"));
-			currentTableCellCheckbox.type = "checkbox";
-			currentTableCellCheckbox.id = "traderightcheckbox41";
-			currentTableCellCheckbox.title = "Check this box to include this Get Out of Jail Free Card in the trade.";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellcolor";
-			currentTableCell.style.backgroundColor = "white";
-			currentTableCell.style.borderColor = "grey";
-
-			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
-			currentTableCell.className = "propertycellname";
-
-			currentTableCell.textContent = "Get Out of Jail Free Card";
-		}
-
 		if (traderSideTable.lastChild) {
 			traderProperty.appendChild(traderSideTable);
 		}
@@ -689,10 +603,6 @@ function Game() {
 		var money;
 		var communityChestJailCard;
 		var chanceJailCard;
-		var communitychestleftcheckbox = document.getElementById("tradeleftcheckbox40")
-		var communitychestrightcheckbox = document.getElementById("traderightcheckbox40")
-		var chanceleftcheckbox = document.getElementById("tradeleftcheckbox41")
-		var chancerightcheckbox = document.getElementById("traderightcheckbox41")
 		for (var i = 0; i < 40; i++) {
 			var tradeleftcheckbox = document.getElementById("tradeleftcheckbox" + i)
 			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
@@ -707,26 +617,6 @@ function Game() {
 			}
 		}
 
-		if (communitychestleftcheckbox && communitychestleftcheckbox.checked) {
-			communityChestJailCard = 1;
-		}
-		else if (communitychestrightcheckbox && communitychestrightcheckbox.checked) {
-			communityChestJailCard = -1;
-		}
-		else {
-			communityChestJailCard = 0;
-		}
-
-		if (chanceleftcheckbox && chanceleftcheckbox.checked) {
-			chanceJailCard = 1;
-		}
-		else if (chancerightcheckbox && chancerightcheckbox.checked) {
-			chanceJailCard = -1;
-		}
-		else {
-			chanceJailCard = 0;
-		}
-
 		money = parseInt(document.getElementById("trade-leftp-money").value, 10) || 0;
 		money -= parseInt(document.getElementById("trade-rightp-money").value, 10) || 0;
 
@@ -736,10 +626,6 @@ function Game() {
 	};
 
 	var writeTrade = function(tradeObj) {
-		var communitychestleftcheckbox = document.getElementById("tradeleftcheckbox40")
-		var communitychestrightcheckbox = document.getElementById("traderightcheckbox40")
-		var chanceleftcheckbox = document.getElementById("tradeleftcheckbox41")
-		var chancerightcheckbox = document.getElementById("traderightcheckbox41")
 		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
 		var traderightplayermoney = document.getElementById("trade-rightp-money")
 
@@ -756,22 +642,6 @@ function Game() {
 			if (traderightcheckbox) {
 				traderightcheckbox.checked = tradeObj.getProperty(i) === -1;
 			}
-		}
-
-		if (communitychestleftcheckbox) {
-			communitychestleftcheckbox.checked = tradeObj.getCommunityChestJailCard() === 1;
-		}
-
-		if (communitychestrightcheckbox) {
-			communitychestrightcheckbox.checked = tradeObj.getCommunityChestJailCard() === -1;
-		}
-
-		if (chanceleftcheckbox) {
-			chanceleftcheckbox.checked = tradeObj.getChanceJailCard() === 1;
-		}
-
-		if (chancerightcheckbox) {
-			chancerightcheckbox.checked = tradeObj.getChanceJailCard() === -1;
 		}
 
 		if (tradeObj.getMoney() > 0) {
@@ -868,8 +738,6 @@ function Game() {
 			isAPropertySelected |= tradeObj.getProperty(i);
 		}
 
-		isAPropertySelected |= tradeObj.getCommunityChestJailCard();
-		isAPropertySelected |= tradeObj.getChanceJailCard();
 
 		if (isAPropertySelected === 0) {
 			popup("<p>One or more properties must be selected in order to trade.</p>");
@@ -892,26 +760,6 @@ function Game() {
 				addAlert(trader.name + " received " + square[i].name + " from " + reciever.name + ".");
 			}
 
-		}
-
-		if (tradeObj.getCommunityChestJailCard() === 1) {
-			trader.communityChestJailCard = false;
-			reciever.communityChestJailCard = true;
-			addAlert(reciever.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
-		} else if (tradeObj.getCommunityChestJailCard() === -1) {
-			trader.communityChestJailCard = true;
-			reciever.communityChestJailCard = false;
-			addAlert(trader.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
-		}
-
-		if (tradeObj.getChanceJailCard() === 1) {
-			trader.chanceJailCard = false;
-			reciever.chanceJailCard = true;
-			addAlert(reciever.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
-		} else if (tradeObj.getChanceJailCard() === -1) {
-			trader.chanceJailCard = true;
-			reciever.chanceJailCard = false;
-			addAlert(trader.name + ' received a "Get Out of Jail Free" card from ' + reciever.name + ".");
 		}
 
 		// Exchange money.
