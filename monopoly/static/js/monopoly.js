@@ -474,30 +474,22 @@ function Game() {
 
 		var amount = this.value;
 
-		if (isNaN(amount)) {
-			this.value = "This value must be a number.";
-			this.style.color = "red";
-			return false;
-		}
-
 		amount = Math.round(amount) || 0;
 		this.value = amount;
-
-		if (amount < 0) {
-			this.value = "This value must be greater than 0.";
-			this.style.color = "red";
-			return false;
-		}
 
 		return true;
 	};
 
-	document.getElementById("trade-leftp-money").onkeydown = tradeMoneyOnKeyDown;
-	document.getElementById("trade-rightp-money").onkeydown = tradeMoneyOnKeyDown;
-	document.getElementById("trade-leftp-money").onfocus = tradeMoneyOnFocus;
-	document.getElementById("trade-rightp-money").onfocus = tradeMoneyOnFocus;
-	document.getElementById("trade-leftp-money").onchange = tradeMoneyOnChange;
-	document.getElementById("trade-rightp-money").onchange = tradeMoneyOnChange;
+	var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+	var traderightplayermoney = document.getElementById("trade-rightp-money")
+
+	tradeleftplayermoney.onkeydown = tradeMoneyOnKeyDown;
+	tradeleftplayermoney.onfocus = tradeMoneyOnFocus;
+	tradeleftplayermoney.onchange = tradeMoneyOnChange;
+	traderightplayermoney.onkeydown = tradeMoneyOnKeyDown;
+	traderightplayermoney.onfocus = tradeMoneyOnFocus;
+	traderightplayermoney.onchange = tradeMoneyOnChange;
+
 
 	var resetTrade = function(initiator, recipient, allowRecipientToBeChanged) {
 		var currentSquare;
@@ -764,8 +756,10 @@ function Game() {
 			currentName.textContent = recipient.name;
 		}
 
-		document.getElementById("trade-leftp-money").value = "0";
-		document.getElementById("trade-rightp-money").value = "0";
+		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+		var traderightplayermoney = document.getElementById("trade-rightp-money")
+		tradeleftplayermoney.value = "0";
+		traderightplayermoney.value = "0";
 
 	};
 
@@ -776,29 +770,33 @@ function Game() {
 		var money;
 		var communityChestJailCard;
 		var chanceJailCard;
-
+		var communitychestleftcheckbox = document.getElementById("tradeleftcheckbox40")
+		var communitychestrightcheckbox = document.getElementById("traderightcheckbox40")
+		var chanceleftcheckbox = document.getElementById("tradeleftcheckbox41")
+		var chancerightcheckbox = document.getElementById("traderightcheckbox41")
 		for (var i = 0; i < 40; i++) {
-
-			if (document.getElementById("tradeleftcheckbox" + i) && document.getElementById("tradeleftcheckbox" + i).checked) {
+			var tradeleftcheckbox = document.getElementById("tradeleftcheckbox" + i)
+			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
+			if (tradeleftcheckbox && tradeleftcheckbox.checked) {
 				property[i] = 1;
-			} else if (document.getElementById("traderightcheckbox" + i) && document.getElementById("traderightcheckbox" + i).checked) {
+			} else if (traderightcheckbox && traderightcheckbox.checked) {
 				property[i] = -1;
 			} else {
 				property[i] = 0;
 			}
 		}
 
-		if (document.getElementById("tradeleftcheckbox40") && document.getElementById("tradeleftcheckbox40").checked) {
+		if (communitychestleftcheckbox && communitychestleftcheckbox.checked) {
 			communityChestJailCard = 1;
-		} else if (document.getElementById("traderightcheckbox40") && document.getElementById("traderightcheckbox40").checked) {
+		} else if (communitychestrightcheckbox && communitychestrightcheckbox.checked) {
 			communityChestJailCard = -1;
 		} else {
 			communityChestJailCard = 0;
 		}
 
-		if (document.getElementById("tradeleftcheckbox41") && document.getElementById("tradeleftcheckbox41").checked) {
+		if (chanceleftcheckbox && chanceleftcheckbox.checked) {
 			chanceJailCard = 1;
-		} else if (document.getElementById("traderightcheckbox41") && document.getElementById("traderightcheckbox41").checked) {
+		} else if (chancerightcheckbox && chancerightcheckbox.checked) {
 			chanceJailCard = -1;
 		} else {
 			chanceJailCard = 0;
@@ -813,61 +811,68 @@ function Game() {
 	};
 
 	var writeTrade = function(tradeObj) {
+		var communitychestleftcheckbox = document.getElementById("tradeleftcheckbox40")
+		var communitychestrightcheckbox = document.getElementById("traderightcheckbox40")
+		var chanceleftcheckbox = document.getElementById("tradeleftcheckbox41")
+		var chancerightcheckbox = document.getElementById("traderightcheckbox41")
+		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+		var traderightplayermoney = document.getElementById("trade-rightp-money")
 		resetTrade(tradeObj.getInitiator(), tradeObj.getRecipient(), false);
 
 		for (var i = 0; i < 40; i++) {
-
-			if (document.getElementById("tradeleftcheckbox" + i)) {
-				document.getElementById("tradeleftcheckbox" + i).checked = false;
+			var tradeleftcheckbox = document.getElementById("tradeleftcheckbox" + i)
+			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
+			if (tradeleftcheckbox) {
+				tradeleftcheckbox.checked = false;
 				if (tradeObj.getProperty(i) === 1) {
-					document.getElementById("tradeleftcheckbox" + i).checked = true;
+					tradeleftcheckbox.checked = true;
 				}
 			}
 
-			if (document.getElementById("traderightcheckbox" + i)) {
-				document.getElementById("traderightcheckbox" + i).checked = false;
+			if (traderightcheckbox) {
+				traderightcheckbox.checked = false;
 				if (tradeObj.getProperty(i) === -1) {
-					document.getElementById("traderightcheckbox" + i).checked = true;
+					traderightcheckbox.checked = true;
 				}
 			}
 		}
 
-		if (document.getElementById("tradeleftcheckbox40")) {
+		if (communitychestleftcheckbox) {
 			if (tradeObj.getCommunityChestJailCard() === 1) {
-				document.getElementById("tradeleftcheckbox40").checked = true;
+				communitychestleftcheckbox.checked = true;
 			} else {
-				document.getElementById("tradeleftcheckbox40").checked = false;
+				communitychestleftcheckbox.checked = false;
 			}
 		}
 
-		if (document.getElementById("traderightcheckbox40")) {
+		if (communitychestrightcheckbox) {
 			if (tradeObj.getCommunityChestJailCard() === -1) {
-				document.getElementById("traderightcheckbox40").checked = true;
+				communitychestrightcheckbox.checked = true;
 			} else {
-				document.getElementById("traderightcheckbox40").checked = false;
+				communitychestrightcheckbox.checked = false;
 			}
 		}
 
-		if (document.getElementById("tradeleftcheckbox41")) {
+		if (chanceleftcheckbox) {
 			if (tradeObj.getChanceJailCard() === 1) {
-				document.getElementById("tradeleftcheckbox41").checked = true;
+				chanceleftcheckbox.checked = true;
 			} else {
-				document.getElementById("tradeleftcheckbox41").checked = false;
+				chanceleftcheckbox.checked = false;
 			}
 		}
 
-		if (document.getElementById("traderightcheckbox41")) {
+		if (chancerightcheckbox) {
 			if (tradeObj.getChanceJailCard() === -1) {
-				document.getElementById("traderightcheckbox41").checked = true;
+				chancerightcheckbox.checked = true;
 			} else {
-				document.getElementById("traderightcheckbox41").checked = false;
+				chancerightcheckbox.checked = false;
 			}
 		}
 
 		if (tradeObj.getMoney() > 0) {
-			document.getElementById("trade-leftp-money").value = tradeObj.getMoney() + "";
+			tradeleftplayermoney.value = tradeObj.getMoney() + "";
 		} else {
-			document.getElementById("trade-rightp-money").value = (-tradeObj.getMoney()) + "";
+			traderightplayermoney.value = (-tradeObj.getMoney()) + "";
 		}
 
 	};
@@ -910,15 +915,18 @@ function Game() {
 	};
 
 	this.acceptTrade = function(tradeObj) {
-		if (isNaN(document.getElementById("trade-leftp-money").value)) {
-			document.getElementById("trade-leftp-money").value = "This value must be a number.";
-			document.getElementById("trade-leftp-money").style.color = "red";
+		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+		var traderightplayermoney = document.getElementById("trade-rightp-money")
+
+		if (isNaN(tradeleftplayermoney.value)) {
+			tradeleftplayermoney.value = "This value must be a number.";
+			tradeleftplayermoney.style.color = "red";
 			return false;
 		}
 
-		if (isNaN(document.getElementById("trade-rightp-money").value)) {
-			document.getElementById("trade-rightp-money").value = "This value must be a number.";
-			document.getElementById("trade-rightp-money").style.color = "red";
+		if (isNaN(traderightplayermoney.value)) {
+			traderightplayermoney.value = "This value must be a number.";
+			traderightplayermoney.style.color = "red";
 			return false;
 		}
 
@@ -939,12 +947,12 @@ function Game() {
 
 
 		if (money > 0 && money > initiator.money) {
-			document.getElementById("trade-leftp-money").value = initiator.name + " does not have $" + money + ".";
-			document.getElementById("trade-leftp-money").style.color = "red";
+			tradeleftplayermoney.value = initiator.name + " does not have $" + money + ".";
+			tradeleftplayermoney.style.color = "red";
 			return false;
 		} else if (money < 0 && -money > recipient.money) {
-			document.getElementById("trade-rightp-money").value = recipient.name + " does not have $" + (-money) + ".";
-			document.getElementById("trade-rightp-money").style.color = "red";
+			traderightplayermoney.value = recipient.name + " does not have $" + (-money) + ".";
+			traderightplayermoney.style.color = "red";
 			return false;
 		}
 
@@ -1030,15 +1038,18 @@ function Game() {
 	};
 
 	this.proposeTrade = function() {
-		if (isNaN(document.getElementById("trade-leftp-money").value)) {
-			document.getElementById("trade-leftp-money").value = "This value must be a number.";
-			document.getElementById("trade-leftp-money").style.color = "red";
+		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
+		var traderightplayermoney = document.getElementById("trade-rightp-money")
+
+		if (isNaN(tradeleftplayermoney.value)) {
+			tradeleftplayermoney.value = "This value must be a number.";
+			tradeleftplayermoney.style.color = "red";
 			return false;
 		}
 
-		if (isNaN(document.getElementById("trade-rightp-money").value)) {
-			document.getElementById("trade-rightp-money").value = "This value must be a number.";
-			document.getElementById("trade-rightp-money").style.color = "red";
+		if (isNaN(traderightplayermoney.value)) {
+			traderightplayermoney.value = "This value must be a number.";
+			traderightplayermoney.style.color = "red";
 			return false;
 		}
 
@@ -1049,12 +1060,12 @@ function Game() {
 		var reversedTradeProperty = [];
 
 		if (money > 0 && money > initiator.money) {
-			document.getElementById("trade-leftp-money").value = initiator.name + " does not have $" + money + ".";
-			document.getElementById("trade-leftp-money").style.color = "red";
+			tradeleftplayermoney.value = initiator.name + " does not have $" + money + ".";
+			tradeleftplayermoney.style.color = "red";
 			return false;
 		} else if (money < 0 && -money > recipient.money) {
-			document.getElementById("trade-rightp-money").value = recipient.name + " does not have $" + (-money) + ".";
-			document.getElementById("trade-rightp-money").style.color = "red";
+			traderightplayermoney.value = recipient.name + " does not have $" + (-money) + ".";
+			traderightplayermoney.style.color = "red";
 			return false;
 		}
 
@@ -1112,18 +1123,16 @@ function Game() {
 		}
 	};
 
-
-
 // bankruptcy, will eliminate player if gone bankrupt, eg. has no money and properties
 	this.eliminatePlayer = function() {
 		var p = player[turn];
-
+		// will take away player from player count.
 		for (var i = p.index; i < pcount; i++) {
 			player[i] = player[i + 1];
 			player[i].index = i;
 
 		}
-
+		// will take away any property owned by eliminated player when they are eliminated.
 		for (var i = 0; i < 40; i++) {
 			if (square[i].owner >= p.index) {
 				square[i].owner--;
@@ -1155,12 +1164,12 @@ function Game() {
 	// When inherited property through bankruptcy, will give you instructions of what you can do
 	this.bankruptcyUnmortgage = function() {
 		var p = player[turn];
-
+		// if the player does not credit anyone with property, eliminate player immediately
 		if (p.creditor === 0) {
 			game.eliminatePlayer();
 			return;
 		}
-
+		// tells the person who inherited the properties that they can unmortgage properties
 		var HTML = "<p>" + player[p.creditor].name + ", you may unmortgage any of the following properties, interest free, by clicking on them. Click OK when finished.</p><table>";
 		var price;
 
@@ -1194,7 +1203,7 @@ function Game() {
 	this.resign = function() {
 		popup("<p>Are you sure you want to resign?</p>", game.bankruptcy, "Yes/No");
 	};
-
+	// when going bankrupt this function will run
 	this.bankruptcy = function() {
 		var p = player[turn];
 		var pcredit = player[p.creditor];
@@ -1206,11 +1215,11 @@ function Game() {
 		}
 		// alerting players that a player has gone bankrupt
 		addAlert(p.name + " is bankrupt.");
-
+		// if the creditor does not equal 0, credit them with the money
 		if (p.creditor !== 0) {
 			pcredit.money += p.money;
 		}
-
+		// for each tile on the board
 		for (var i = 0; i < 40; i++) {
 			sq = square[i];
 			if (sq.owner == p.index) {
@@ -1437,7 +1446,7 @@ function updatePosition() {
 		}
 
 		for (var y = 1; y < turn; y++) {
-
+			// updates the cell with color of player
 			if (player[y].position == x && !player[y].jail) {
 				document.getElementById("cell" + x + "positionholder").innerHTML += "<div class='cell-position' title='" + player[y].name + "' style='background-color: " + player[y].color + "; left: " + left + "px; top: " + top + "px;'></div>";
 				if (left == 36) {
@@ -1594,7 +1603,7 @@ function updateOwned() {
 			if (sq.mortgage) {
 				mortgagetext = "title='Mortgaged' style='color: grey;'";
 			}
-
+			// if player buys house, it will add house to property and display it in stats screen, will build hotel if player has 4 houses
 			housetext = "";
 			if (sq.house >= 1 && sq.house <= 4) {
 				for (var x = 1; x <= sq.house; x++) {
@@ -1644,7 +1653,7 @@ function updateOwned() {
 
 	document.getElementById("owned").innerHTML = HTML;
 
-	// Select previously selected property.
+	// select the property that was previously selected.
 	if (checkedproperty > -1 && document.getElementById("propertycheckbox" + checkedproperty)) {
 		document.getElementById("propertycheckbox" + checkedproperty).checked = true;
 	} else if (firstproperty > -1) {
@@ -1653,12 +1662,12 @@ function updateOwned() {
 	$(".property-cell-row").click(function() {
 		var row = this;
 
-		// Toggle check the current checkbox.
+		// toggle check on the current select box.
 		$(this).find(".propertycellcheckbox > input").prop("checked", function(index, val) {
 			return !val;
 		});
 
-		// Set all other checkboxes to false.
+		// have all other checkboxes to false or empty
 		$(".propertycellcheckbox > input").prop("checked", function(index, val) {
 			if (!$.contains(row, this)) {
 				return false;
