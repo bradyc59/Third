@@ -88,6 +88,9 @@ class ProfileView(View):
         }
         return render(request, self.template_name, res)
 
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 class LoginView(View):
     initial = {'active_page': 'register'}
