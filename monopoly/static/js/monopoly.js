@@ -1,6 +1,6 @@
 
-// square function sets name, price, color etc. for each tile
-function Square(name, pricetext, color, price, groupNum, baserent, rent1, rent2, rent3, rent4, rent5) {
+// Tiles function sets name, price, color etc. for each tile
+function Tiles(name, pricetext, color, price, groupNum, baserent, level1, level2, level3, level4, level5) {
 	this.name = name;
 	this.pricetext = pricetext;
 	this.color = color;
@@ -11,11 +11,11 @@ function Square(name, pricetext, color, price, groupNum, baserent, rent1, rent2,
 	this.groupNum = groupNum || 0;
 	this.price = (price || 0);
 	this.baserent = (baserent || 0);
-	this.rent1 = (rent1 || 0);
-	this.rent2 = (rent2 || 0);
-	this.rent3 = (rent3 || 0);
-	this.rent4 = (rent4 || 0);
-	this.rent5 = (rent5 || 0);
+	this.level1 = (level1 || 0);
+	this.level2 = (level2 || 0);
+	this.level3 = (level3 || 0);
+	this.level4 = (level4 || 0);
+	this.level5 = (level5 || 0);
 	this.landcount = 0;
 
 	if (groupNum === 3 || groupNum === 4) {
@@ -39,11 +39,11 @@ function Card(text, action) {
 
 // Intrustions for food areas
 function foodArea() {
-	return '&nbsp;&nbsp;&nbsp;&nbsp;If one "Food Area" is owned rent is 4 times amount shown on dice.<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;If both "food Area" are owned rent is 10 times amount shown on dice.';
+	return '&nbsp;If one "Food Area" is owned rent is 4 times amount shown on dice.<br /><br />&nbsp;If both "food Area" are owned rent is 10 times amount shown on dice.';
 }
 // Intrustions for Campuses
 function campus() {
-	return '<div style="font-size: 14px; line-height: 1.5;">Rent<span style="float: right;">$25.</span><br />If 2 campuss are owned<span style="float: right;">50.</span><br />If 3 &nbsp; &nbsp; " &nbsp; &nbsp; " &nbsp; &nbsp; "<span style="float: right;">100.</span><br />If 4 &nbsp; &nbsp; " &nbsp; &nbsp; " &nbsp; &nbsp; "<span style="float: right;">200.</span></div>';
+	return '<div style="font-size: 14px; line-height: 1.5;">Rent<span style="float: right;">$25.</span><br />If 2 campuses are owned<span style="float: right;">50.</span><br />If 3 campuses are owned<span style="float: right;">100.</span><br />If 4 campuses are owned<span style="float: right;">200.</span></div>';
 }
 
 // Instructions for Student Levy
@@ -64,48 +64,48 @@ function studentfees() {
 var square = [];
 
 // Adding the tiles in with instructions
-square[0] = new Square("GO", "COLLECT $200 SALARY AS YOU PASS.", "#FFFFFF");
-square[1] = new Square("Henry Grattan Building", "$60", "#8B4513", 60, 3, 2, 10, 30, 90, 160, 250);
-square[2] = new Square("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[3] = new Square("Albert College", "$60", "#8B4513", 60, 3, 4, 20, 60, 180, 320, 450);
-square[4] = new Square("Registration Fees", "Pay $200", "#FFFFFF");
-square[5] = new Square("Glasnevin Campus", "$200", "#FFFFFF", 200, 1);
-square[6] = new Square("Hamilton Building", "$100", "#87CEEB", 100, 4, 6, 30, 90, 270, 400, 550);
-square[7] = new Square("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[8] = new Square("Terence Larkin Building", "$100", "#87CEEB", 100, 4, 6, 30, 90, 270, 400, 550);
-square[9] = new Square("Hampsted", "$120", "#87CEEB", 120, 4, 8, 40, 100, 300, 450, 600);
-square[10] = new Square("Just Visiting", "", "#FFFFFF");
-square[11] = new Square("Larkfield", "$140", "#FF0080", 140, 5, 10, 50, 150, 450, 625, 750);
-square[12] = new Square("Glasnevin Resturant", "$150", "#FFFFFF", 150, 2);
-square[13] = new Square("Invent Building", "$140", "#FF0080", 140, 5, 10, 50, 150, 450, 625, 750);
-square[14] = new Square("NICB Building", "$160", "#FF0080", 160, 5, 12, 60, 180, 500, 700, 900);
-square[15] = new Square("Saint Patricks Campus", "$200", "#FFFFFF", 200, 1);
-square[16] = new Square("Lonsdale Building", "$180", "#FFA500", 180, 6, 14, 70, 200, 550, 750, 950);
-square[17] = new Square("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[18] = new Square("Stokes Building", "$180", "#FFA500", 180, 6, 14, 70, 200, 550, 750, 950);
-square[19] = new Square("Marconi Building", "$200", "#FFA500", 200, 6, 16, 80, 220, 600, 800, 1000);
-square[20] = new Square("Free Parking", "", "#FFFFFF");
-square[21] = new Square("DCU Business School", "$220", "#FF0000", 220, 7, 18, 90, 250, 700, 875, 1050);
-square[22] = new Square("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[23] = new Square("Inner Faith Centre", "$220", "#FF0000", 220, 7, 18, 90, 250, 700, 875, 1050);
-square[24] = new Square("John & Aileen O'Reilly Library", "$240", "#FF0000", 240, 7, 20, 100, 300, 750, 925, 1100);
-square[25] = new Square("All Hallows Campus", "$200", "#FFFFFF", 200, 1);
-square[26] = new Square("Eswell Building", "$260", "#FFFF00", 260, 8, 22, 110, 330, 800, 975, 1150);
-square[27] = new Square("Healthy Living Centre", "$260", "#FFFF00", 260, 8, 22, 110, 330, 800, 975, 1150);
-square[28] = new Square("On Campus Londis", "$150", "#FFFFFF", 150, 2);
-square[29] = new Square("MacCormac Building", "$280", "#FFFF00", 280, 8, 24, 120, 360, 850, 1025, 1200);
-square[30] = new Square("Go to Jail", "Go directly to Jail. Do not pass GO. Do not collect $200.", "#FFFFFF");
-square[31] = new Square("McNulty Building", "$300", "#008000", 300, 9, 26, 130, 390, 900, 1100, 1275);
-square[32] = new Square("The Pavillion", "$300", "#008000", 300, 9, 26, 130, 390, 900, 1100, 1275);
-square[33] = new Square("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[34] = new Square("The Helix", "$320", "#008000", 320, 9, 28, 150, 450, 1000, 1200, 1400);
-square[35] = new Square("DCU Sports Campus", "$200", "#FFFFFF", 200, 1);
-square[36] = new Square("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
-square[37] = new Square("The SU Building", "$350", "#0000FF", 350, 10, 35, 175, 500, 1100, 1300, 1500);
-square[38] = new Square("Student Levy", "Pay $100", "#FFFFFF");
-square[39] = new Square("The Nu Bar", "$400", "#0000FF", 400, 10, 50, 200, 600, 1400, 1700, 2000);
+square[0] = new Tiles("GO", "COLLECT $200 SALARY AS YOU PASS.", "#FFFFFF");
+square[1] = new Tiles("Henry Grattan Building", "$60", "#8B4513", 60, 3, 2, 10, 30, 90, 160, 250);
+square[2] = new Tiles("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[3] = new Tiles("Albert College", "$60", "#8B4513", 60, 3, 4, 20, 60, 180, 320, 450);
+square[4] = new Tiles("Registration Fees", "Pay $200", "#FFFFFF");
+square[5] = new Tiles("Glasnevin Campus", "$200", "#FFFFFF", 200, 1);
+square[6] = new Tiles("Hamilton Building", "$100", "#87CEEB", 100, 4, 6, 30, 90, 270, 400, 550);
+square[7] = new Tiles("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[8] = new Tiles("Terence Larkin Building", "$100", "#87CEEB", 100, 4, 6, 30, 90, 270, 400, 550);
+square[9] = new Tiles("Hampsted", "$120", "#87CEEB", 120, 4, 8, 40, 100, 300, 450, 600);
+square[10] = new Tiles("Just Visiting", "", "#FFFFFF");
+square[11] = new Tiles("Larkfield", "$140", "#FF0080", 140, 5, 10, 50, 150, 450, 625, 750);
+square[12] = new Tiles("Glasnevin Resturant", "$150", "#FFFFFF", 150, 2);
+square[13] = new Tiles("Invent Building", "$140", "#FF0080", 140, 5, 10, 50, 150, 450, 625, 750);
+square[14] = new Tiles("NICB Building", "$160", "#FF0080", 160, 5, 12, 60, 180, 500, 700, 900);
+square[15] = new Tiles("Saint Patricks Campus", "$200", "#FFFFFF", 200, 1);
+square[16] = new Tiles("Lonsdale Building", "$180", "#FFA500", 180, 6, 14, 70, 200, 550, 750, 950);
+square[17] = new Tiles("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[18] = new Tiles("Stokes Building", "$180", "#FFA500", 180, 6, 14, 70, 200, 550, 750, 950);
+square[19] = new Tiles("Marconi Building", "$200", "#FFA500", 200, 6, 16, 80, 220, 600, 800, 1000);
+square[20] = new Tiles("Free Parking", "", "#FFFFFF");
+square[21] = new Tiles("DCU Business School", "$220", "#FF0000", 220, 7, 18, 90, 250, 700, 875, 1050);
+square[22] = new Tiles("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[23] = new Tiles("Inner Faith Centre", "$220", "#FF0000", 220, 7, 18, 90, 250, 700, 875, 1050);
+square[24] = new Tiles("John & Aileen O'Reilly Library", "$240", "#FF0000", 240, 7, 20, 100, 300, 750, 925, 1100);
+square[25] = new Tiles("All Hallows Campus", "$200", "#FFFFFF", 200, 1);
+square[26] = new Tiles("Eswell Building", "$260", "#FFFF00", 260, 8, 22, 110, 330, 800, 975, 1150);
+square[27] = new Tiles("Healthy Living Centre", "$260", "#FFFF00", 260, 8, 22, 110, 330, 800, 975, 1150);
+square[28] = new Tiles("On Campus Londis", "$150", "#FFFFFF", 150, 2);
+square[29] = new Tiles("MacCormac Building", "$280", "#FFFF00", 280, 8, 24, 120, 360, 850, 1025, 1200);
+square[30] = new Tiles("Go to Jail", "Go directly to Jail. Do not pass GO. Do not collect $200.", "#FFFFFF");
+square[31] = new Tiles("McNulty Building", "$300", "#008000", 300, 9, 26, 130, 390, 900, 1100, 1275);
+square[32] = new Tiles("The Pavillion", "$300", "#008000", 300, 9, 26, 130, 390, 900, 1100, 1275);
+square[33] = new Tiles("Community Chest", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[34] = new Tiles("The Helix", "$320", "#008000", 320, 9, 28, 150, 450, 1000, 1200, 1400);
+square[35] = new Tiles("DCU Sports Campus", "$200", "#FFFFFF", 200, 1);
+square[36] = new Tiles("Chance", "FOLLOW INSTRUCTIONS ON TOP CARD", "#FFFFFF");
+square[37] = new Tiles("The SU Building", "$350", "#0000FF", 350, 10, 35, 175, 500, 1100, 1300, 1500);
+square[38] = new Tiles("Student Levy", "Pay $100", "#FFFFFF");
+square[39] = new Tiles("The Nu Bar", "$400", "#0000FF", 400, 10, 50, 200, 600, 1400, 1700, 2000);
 
-// Empty Community Chest Cards and Chance Cards
+// Empty Community Chest Cards and Chance Cards List
 var communityChestCards = [];
 var chanceCards = [];
 
@@ -114,41 +114,35 @@ communityChestCards[0] = new Card("Get out of Jail, Free. This card may be kept 
 communityChestCards[1] = new Card("You have won Mi Soc hotdog eating contest. Collect $10.", function() { addamount(10, 'Community Chest');});
 communityChestCards[2] = new Card("From sale of old college books, you get $50.", function() { addamount(50, 'Community Chest');});
 communityChestCards[3] = new Card("You get SUSI. Collect $100.", function() { addamount(100, 'Community Chest');});
-communityChestCards[4] = new Card("A generous man offers you money to help with tuition. Collect $20.", function() { addamount(20, 'Community Chest');});
-communityChestCards[5] = new Card("You win at Bingo Loco. Receive $100.", function() { addamount(100, 'Community Chest');});
-communityChestCards[6] = new Card("You inherit $100.", function() { addamount(100, 'Community Chest');});
-communityChestCards[7] = new Card("Receive $25 for helping a mate with a project.", function() { addamount(25, 'Community Chest');});
-communityChestCards[8] = new Card("You threw a party in your dorm. Pay damage fees of $100.", function() { subtractamount(100, 'Community Chest');});
-communityChestCards[9] = new Card("Bank error in your favor. Collect $200.", function() { addamount(200, 'Community Chest');});
-communityChestCards[10] = new Card("You have to buy a book for a new module. Pay $50.", function() { subtractamount(50, 'Community Chest');});
-communityChestCards[11] = new Card("Doctor's fee. Pay $50.", function() { subtractamount(50, 'Community Chest');});
-communityChestCards[12] = new Card("It is your birthday. Collect $10 from every player.", function() { collectfromeachplayer(10, 'Community Chest');});
-communityChestCards[13] = new Card("Advance to \"GO\" (Collect $200).", function() { advance(0);});
-communityChestCards[14] = new Card("You are assessed for street repairs. $40 per house. $115 per hotel.", function() { streetrepairs(40, 115);});
-communityChestCards[15] = new Card("Go to Jail. Go directly to Jail. Do not pass \"GO\". Do not collect $200.", function() { gotojail();});
+communityChestCards[4] = new Card("You inherit $100.", function() { addamount(100, 'Community Chest');});
+communityChestCards[5] = new Card("Receive $25 for helping a mate with a project.", function() { addamount(25, 'Community Chest');});
+communityChestCards[6] = new Card("You threw a party in your dorm. Pay damage fees of $100.", function() { subtractamount(100, 'Community Chest');});
+communityChestCards[7] = new Card("Bank error in your favor. Collect $200.", function() { addamount(200, 'Community Chest');});
+communityChestCards[8] = new Card("You have to buy a book for a new module. Pay $50.", function() { subtractamount(50, 'Community Chest');});
+communityChestCards[9] = new Card("It is your birthday. Collect $10 from every player.", function() { collectfromeachplayer(10, 'Community Chest');});
+communityChestCards[10] = new Card("Advance to \"GO\" (Collect $200).", function() { advance(0);});
+communityChestCards[11] = new Card("You are assessed for street repairs. $40 per house. $115 per hotel.", function() { streetrepairs(40, 115);});
+communityChestCards[12] = new Card("Go to Jail. Go directly to Jail. Do not pass \"GO\". Do not collect $200.", function() { gotojail();});
 
 // Assigning Chance cards into the list with certain tasks and actions
-chanceCards[0] = new Card("GET OUT OF JAIL FREE. This card may be kept until needed or traded.", function(p) { p.chanceJailCard=true; updateOwned();});
+chanceCards[0] = new Card("Get out of Jail, Free. This card may be kept until needed or traded.", function(p) { p.chanceJailCard=true; updateOwned();});
 chanceCards[1] = new Card("Make General Repairs on All Your Property. For each house pay $25. For each hotel $100.", function() { streetrepairs(25, 100);});
-chanceCards[2] = new Card("You were late to an exam and were caught speeding. Pay Speeding fine $15.", function() { subtractamount(15, 'Chance');});
-chanceCards[3] = new Card("You have been elected president of the SU. Pay each player $50.", function() { payeachplayer(50, 'Chance');});
-chanceCards[4] = new Card("Go back three spaces.", function() { gobackthreespaces();});
-chanceCards[5] = new Card("Advance to the nearest Food Area. If unowned, you may buy it from the Bank. IF OWNED, throw dice and pay owner a total ten times the amount thrown.", function() { advanceToNearestfoodArea();});
-chanceCards[6] = new Card("Bank pays you dividend of $50.", function() { addamount(50, 'Chance');});
-chanceCards[7] = new Card("Advance to the nearest campus. If unowned, you may buy it from the Bank. If OWNED, pay owner twice the rental to which they are otherwise entitled.", function() { advanceToNearestcampus();});
-chanceCards[8] = new Card("You failed an exam. Pay resit fees of $15.", function() { subtractamount(15, 'Chance');});
-chanceCards[9] = new Card("Take a trip to Glasnevin Campus. If you pass \"GO\" collect $200.", function() { advance(5);});
-chanceCards[10] = new Card("Advance to NuBar.", function() { advance(39);});
-chanceCards[11] = new Card("Advance to John and Aileen O'Reilly Libary. If you pass \"GO\" collect $200.", function() { advance(24);});
-chanceCards[12] = new Card("Your crypto investment matures. Collect $150.", function() { addamount(150, 'Chance');});
-chanceCards[13] = new Card("Advance to the nearest campus. If UNOWNED, you may buy it from the Bank. If OWNED, pay owner twice the rental to which they are otherwise entitled.", function() { advanceToNearestcampus();});
-chanceCards[14] = new Card("Advance to Larkfield. If you pass \"GO\" collect $200.", function() { advance(11);});
-chanceCards[15] = new Card("Go to Jail. Go Directly to Jail. Do not pass \"GO\". Do not collect $200.", function() { gotojail();});
+chanceCards[2] = new Card("You have been elected president of the SU. Pay each player $50.", function() { payeachplayer(50, 'Chance');});
+chanceCards[3] = new Card("Go back three spaces.", function() { gobackthreespaces();});
+chanceCards[4] = new Card("Advance to the nearest Food Area. If unowned, you may buy it from the Bank. IF OWNED, throw dice and pay owner a total ten times the amount thrown.", function() { advanceToNearestfoodArea();});
+chanceCards[5] = new Card("Advance to the nearest campus. If unowned, you may buy it from the Bank. If OWNED, pay owner twice the rental to which they are otherwise entitled.", function() { advanceToNearestcampus();});
+chanceCards[6] = new Card("You failed an exam. Pay resit fees of $15.", function() { subtractamount(15, 'Chance');});
+chanceCards[7] = new Card("Take a trip to Glasnevin Campus. If you pass \"GO\" collect $200.", function() { advance(5);});
+chanceCards[8] = new Card("Advance to NuBar.", function() { advance(39);});
+chanceCards[9] = new Card("Advance to John and Aileen O'Reilly Libary. If you pass \"GO\" collect $200.", function() { advance(24);});
+chanceCards[10] = new Card("Your crypto investment matures. Collect $150.", function() { addamount(150, 'Chance');});
+chanceCards[11] = new Card("Advance to Larkfield. If you pass \"GO\" collect $200.", function() { advance(11);});
+chanceCards[12] = new Card("Go to Jail. Go Directly to Jail. Do not pass \"GO\". Do not collect $200.", function() { gotojail();});
 
 // Game function which controls the whole game
 function Game() {
-	var die1;
-	var die2;
+	var dice1;
+	var dice2;
 	var diceRolled = false;
 
 	var auctionQueue = [];
@@ -158,8 +152,8 @@ function Game() {
 	var auctionproperty;
 	// Rolls the dice by randomizing numbers 1-6
 	this.rollDice = function() {
-		die1 = Math.floor(Math.random() * 6) + 1;
-		die2 = Math.floor(Math.random() * 6) + 1;
+		dice1 = Math.floor(Math.random() * 6) + 1;
+		dice2 = Math.floor(Math.random() * 6) + 1;
 		diceRolled = true;
 	};
 	// resets dice so it is ready to be re-rolled
@@ -173,7 +167,7 @@ function Game() {
 			p.AI.payDebt();
 			// if player has no money, go bankrupt and pay player who made him go bankrupt
 			if (p.money < 0) {
-				popup("<p>" + p.name + " is bankrupt. All of its assets will be turned over to " + player[p.creditor].name + ".</p>", game.bankruptcy);
+				popup("<p>" + p.name + " cannot pay. All properties will be given to " + player[p.creditor].name + ".</p>", game.bankruptcy);
 			} else {
 				roll();
 			}
@@ -185,45 +179,18 @@ function Game() {
 		}
 	};
 
-	this.getDie = function(die) {
-		if (die === 1) {
+	this.getDice = function(dice) {
+		if (dice === 1) {
 
-			return die1;
+			return dice1;
 		} else {
 
-			return die2;
+			return dice2;
 		}
 
 	};
 
 
-
-	// sets p to the highest bidder and sq to the property thats being auctioned
-	var finalizeAuction = function() {
-		var p = player[highestbidder];
-		var sq = square[auctionproperty];
-		// if highest bid is greater than 0
-		if (highestbid > 0) {
-			p.pay(highestbid, 0);
-			sq.owner = highestbidder;
-			addAlert(p.name + " bought " + sq.name + " for $" + highestbid + ".");
-		}
-		// for every player in game, let them bid
-		for (var i = 1; i <= pcount; i++) {
-			player[i].bidding = true;
-		}
-
-		$("#popupbackground").hide();
-		$("#popupwrap").hide();
-		// if there is no auction, continue playing the game
-		if (!game.auction()) {
-			play();
-		}
-	};
-	// add a property to auction queue, done when player gone bankrupt.
-	this.addPropertyToAuctionQueue = function(propertyIndex) {
-		auctionQueue.push(propertyIndex);
-	};
 	// when auction queue is equal to 0, return false
 	this.auction = function() {
 		if (auctionQueue.length === 0) {
@@ -232,9 +199,9 @@ function Game() {
 
 		index = auctionQueue.shift();
 
-		var s = square[index];
+		var pieces = square[index];
 		// if the price bid for property is 0 now the owner does not equal 0, place the property for auction
-		if (s.price === 0 || s.owner !== 0) {
+		if (pieces.price === 0 || pieces.owner !== 0) {
 			return game.auction();
 		}
 	
@@ -247,7 +214,7 @@ function Game() {
 			currentbidder -= pcount;
 		}
 
-		popup("<div style='font-weight: bold; font-size: 16px; margin-bottom: 10px;'>Auction <span id='propertyname'></span></div><div>Highest Bid = $<span id='highestbid'></span> (<span id='highestbidder'></span>)</div><div><span id='currentbidder'></span>, it is your turn to bid.</div<div><input id='bid' title='Enter an amount to bid on " + s.name + ".' style='width: 291px;' /></div><div><input type='button' value='Bid' onclick='game.auctionBid();' title='Place your bid.' /><input type='button' value='Pass' title='Skip bidding this time.' onclick='game.auctionPass();' /><input type='button' value='Exit Auction' title='Stop bidding on " + s.name + " altogether.' onclick='if (confirm(\"Are you sure you want to stop bidding on this property altogether?\")) game.auctionExit();' /></div>", "blank");
+		popup("<div style='font-size: 16px; margin-bottom: 10px;'>Auction <span id='propertyname'></span></div><div>Highest Bid = <span id='highestbid'></span> (<span id='highestbidder'></span>)</div><div><span id='currentbidder'></span>, it is your turn.</div<div><input id='bid' title='Enter an amount to bid" + s.name + ".' style='width: 291px;' /></div><div><input type='button' value='Bid' onclick='game.auctionBid();' title='Place your bid.' /><input type='button' value='Pass' title='Skip bidding.' onclick='game.auctionPass();' /><input type='button' value='Exit Auction' title='Stop bidding.' onclick='if (confirm(\"Are you sure you want to stop bidding?\")) game.auctionExit();' /></div>", "blank");
 		// get the property name
 		var auctionpropertyname = document.getElementById("propertyname")
 
@@ -264,53 +231,8 @@ function Game() {
 		var currentplayerbidder = document.getElementById("currrentbidder")
 
 		currentplayerbidder.innerHTML = player[currentbidder].name;
-		// get the current bid
-		var bidelement = document.getElementById("bid")
 
-		bidelement.onkeydown = function (e) {
-			var key = 0;
-			var isCtrl = false;
-			var isShift = false;
-
-			if (window.event) {
-				key = window.event.keyCode;
-				isCtrl = window.event.ctrlKey;
-				isShift = window.event.shiftKey;
-			} else if (e) {
-				key = e.keyCode;
-				isCtrl = e.ctrlKey;
-				isShift = e.shiftKey;
-			}
-			// if it is not a number, return true
-			if (isNaN(key)) {
-				return true;
-			}
-			// if the user presses enter, submit their auction bid
-			if (key === 13) {
-				game.auctionBid();
-				return false;
-			}
-
-			// Allow backspace, tab, delete, arrow keys, or if control was pressed, respectively.
-			if (key === 8 || key === 9 || key === 46 || (key >= 35 && key <= 40) || isCtrl) {
-				return true;
-			}
-
-			if (isShift) {
-				return false;
-			}
-
-			// Only allow number keys to be entered.
-			return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
-		};
-
-		bidelement.onfocus = function () {
-			this.style.color = "black";
-			if (isNaN(this.value)) {
-				this.value = "";
-			}
-		};
-
+		//Updating Money on auction finish
 		updateMoney();
 		// the current bidder in not a human player
 		if (!player[currentbidder].human) {
@@ -319,6 +241,51 @@ function Game() {
 		}
 		return true;
 	};
+
+	this.auctionBid = function(bid) {
+		// get the current bid
+		var bidelement = document.getElementById("bid")
+		// get the current highest bidder
+		var highestplayerbidder = document.getElementById("highestbidder")
+		// get the current highest bid
+		var highestcurrentbid = document.getElementById("highestbid")
+
+		bid = bid || parseInt(bidelement.value, 10);
+
+		// if bid is not a number, tell user to enter a number
+		if (isNaN(bid)) {
+			bidelement.value = "Your bid must be a cash amount";
+			bidelement.style.color = "red";
+		}
+		// if bid is empty, tell user to enter a bid
+		else if (bid === "" || bid === null) {
+			bidelement.value = "Please enter an amount to bid.";
+			bidelement.style.color = "red";
+		}
+		// if the user has bid more than their balance, tell user they can bid that much
+		else if (bid > player[currentbidder].money) {
+				bidelement.value = "You don't have enough money to bid this amount" + bid + ".";
+				bidelement.style.color = "red";
+			} // if users bid is higher than current bid, have them as new highest bidder
+		else if (bid > highestbid) {
+				highestbid = bid;
+				highestcurrentbid.innerHTML = parseInt(bid, 10);
+				highestbidder = currentbidder;
+				highestplayerbidder.innerHTML = player[highestbidder].name;
+
+				bidelement.focus();
+				// if they are current highest bidder, pass them through the round
+				if (player[currentbidder].human) {
+					this.auctionPass();
+				}
+			}
+		else {
+				// if user input bid smaller than current bid
+				bidelement.value = "Your bid must be more than current highest bid. (" + highestbid + ")";
+				bidelement.style.color = "red";
+			}
+		};
+
 
 	this.auctionPass = function() {
 		// if highest bidder is equal to 0, highest bidder is equal to current bidder
@@ -333,29 +300,30 @@ function Game() {
 				currentbidder -= pcount;
 			}
 			// if current bidder is equal to highest bidder, finalize the auction
-			if (currentbidder == highestbidder) {
+			if (currentbidder === highestbidder) {
 				finalizeAuction();
 				return;
-			} // if the current player is bidding 
+			}
+			// if the current player is bidding
 			else if (player[currentbidder].bidding) {
-				var p = player[currentbidder];
+				var user = player[currentbidder];
 				// if the player is not a human player, let AI bid
-				if (!p.human) {
-					var bid = p.AI.bid(auctionproperty, highestbid);
+				if (!user.human) {
+					var bid = user.AI.bid(auctionproperty, highestbid);
 					// if highest bid is more than players money, exit auction
-					if (bid === -1 || highestbid >= p.money) {
-						p.bidding = false;
+					if (bid === -1 || highestbid >= user.money) {
+						user.bidding = false;
 
-						window.alert(p.name + " exited the auction.");
+						window.alert(user.name + " has left the auction");
 						continue;
 						// if player chooses to pass this round of bidding, pass
 					} else if (bid === 0) {
-						window.alert(p.name + " passed.");
+						window.alert(user.name + " passed this round of bidding.");
 						continue;
 						// if player wishes to bid, they bid
 					} else if (bid > 0) {
 						this.auctionBid(bid);
-						window.alert(p.name + " bid $" + bid + ".");
+						window.alert(user.name + " has bid " + bid);
 						continue;
 					}
 					return;
@@ -365,6 +333,13 @@ function Game() {
 			}
 
 		}
+
+		// exit auction
+		this.auctionExit = function() {
+			player[currentbidder].bidding = false;
+			this.auctionPass();
+		};
+
 		// get current players bid
 		var currentplayerbidder = document.getElementById("currentbidder")
 		currentplayerbidder.innerHTML = player[currentbidder].name
@@ -373,101 +348,42 @@ function Game() {
 		bidelement.value = "";
 		bidelement.style.color = "black";
 	};
-	// getting the actual bid for the property
-	this.auctionBid = function(bid) {
-		// get the current bid
-		var bidelement = document.getElementById("bid")
-		// get the current highest bidder
-		var highestplayerbidder = document.getElementById("highestbidder")
-		// get the current highest bid
-		var highestcurrentbid = document.getElementById("highestbid")
 
-		bid = bid || parseInt(document.getElementById("bid").value, 10);
-		// if bid is empty, tell user to enter a bid
-		if (bid === "" || bid === null) {
-			bidelement.value = "Please enter a bid.";
-			bidelement.style.color = "red";
-		} // if bid is not a number, tell user to enter a number
-		else if (isNaN(bid)) {
-			bidelement.value = "Your bid must be a number.";
-			bidelement.style.color = "red";
-		} else {
-			// if the user has bid more than their balance, tell user they can bid that much
-			if (bid > player[currentbidder].money) {
-				bidelement.value = "You don't have enough money to bid $" + bid + ".";
-				bidelement.style.color = "red";
-			} // if users bid is higher than current bid, have them as new highest bidder 
-			else if (bid > highestbid) {
-				highestbid = bid;
-				highestcurrentbid.innerHTML = parseInt(bid, 10);
-				highestbidder = currentbidder;
-				highestplayerbidder.innerHTML = player[highestbidder].name;
+	// sets user to the highest bidder and sq to the property thats being auctioned
+	var finalizeAuction = function() {
+		var user = player[highestbidder];
+		var tiles = square[auctionproperty];
+		// if highest bid is greater than 0
+		if (highestbid > 0) {
+			user.pay(highestbid, 0);
+			tiles.owner = highestbidder;
+			addAlert(user.name + " bought " + tiles.name + " for " + highestbid);
+		}
 
-				bidelement.focus();
-				// if they are current highest bidder, pass them through the round
-				if (player[currentbidder].human) {
-					this.auctionPass();
-				}
-			} else {
-				// if user input bid smaller than current bid
-				bidelement.value = "Your bid must be greater than highest bid. ($" + highestbid + ")";
-				bidelement.style.color = "red";
-			}
+		// for every player in game, let them bid
+		for (var i = 1; i <= pcount; i++) {
+			player[i].bidding = true;
+		}
+
+		$("#popupbackground").hide();
+		$("#popupwrap").hide();
+		// if there is no auction, continue playing the game
+		if (!game.auction()) {
+			play();
 		}
 	};
-	// exit auction
-	this.auctionExit = function() {
-		player[currentbidder].bidding = false;
-		this.auctionPass();
+
+	// add a property to auction queue, done when player gone bankrupt not bu paying other user.
+	this.addPropertyToAuctionQueue = function(propertyIndex) {
+		auctionQueue.push(propertyIndex);
 	};
 
 
-	var currentInitiator;
-	var currentRecipient;
+	// Trade Functionality
 
+	var currentTrader;
+	var currentReciever;
 
-	var tradeMoneyOnKeyDown = function (e) {
-		var key = 0;
-		var isCtrl = false;
-		var isShift = false;
-		// if the window event is key, Ctrl, Shift
-		if (window.event) {
-			key = window.event.keyCode;
-			isCtrl = window.event.ctrlKey;
-			isShift = window.event.shiftKey;
-		} else if (e) {
-			key = e.keyCode;
-			isCtrl = e.ctrlKey;
-			isShift = e.shiftKey;
-		}
-
-		if (isNaN(key)) {
-			return true;
-		}
-
-		if (key === 13) {
-			return false;
-		}
-
-		// Allow backspace, tab, delete, arrow keys, or if control was pressed, respectively.
-		if (key === 8 || key === 9 || key === 46 || (key >= 35 && key <= 40) || isCtrl) {
-			return true;
-		}
-
-		if (isShift) {
-			return false;
-		}
-
-		// Only allow number keys.
-		return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
-	};
-
-	var tradeMoneyOnFocus = function () {
-		this.style.color = "black";
-		if (isNaN(this.value) || this.value === "0") {
-			this.value = "";
-		}
-	};
 
 	var tradeMoneyOnChange = function(e) {
 		$("#proposetradebutton").show();
@@ -486,22 +402,18 @@ function Game() {
 	var tradeleftplayermoney = document.getElementById("trade-leftp-money")
 	var traderightplayermoney = document.getElementById("trade-rightp-money")
 
-	tradeleftplayermoney.onkeydown = tradeMoneyOnKeyDown;
-	tradeleftplayermoney.onfocus = tradeMoneyOnFocus;
 	tradeleftplayermoney.onchange = tradeMoneyOnChange;
-	traderightplayermoney.onkeydown = tradeMoneyOnKeyDown;
-	traderightplayermoney.onfocus = tradeMoneyOnFocus;
 	traderightplayermoney.onchange = tradeMoneyOnChange;
 
 
-	var resetTrade = function(initiator, recipient, allowRecipientToBeChanged) {
+	var resetTrade = function(trader, reciever, allowRecieverToBeChanged) {
 		var currentSquare;
 		var currentTableRow;
 		var currentTableCell;
 		var currentTableCellCheckbox;
 		var nameSelect;
 		var currentOption;
-		var allGroupUninproved;
+		var Unimproved;
 		var currentName;
 
 		var tableRowOnClick = function(e) {
@@ -517,23 +429,23 @@ function Game() {
 			$("#rejecttradebutton").hide();
 		};
 
-		var initiatorProperty = document.getElementById("trade-leftp-property");
-		var recipientProperty = document.getElementById("trade-rightp-property");
+		var traderProperty = document.getElementById("trade-leftp-property");
+		var recieverProperty = document.getElementById("trade-rightp-property");
 
-		currentInitiator = initiator;
-		currentRecipient = recipient;
+		currentTrader = trader;
+		currentReciever = reciever;
 
 		// Empty elements.
-		while (initiatorProperty.lastChild) {
-			initiatorProperty.removeChild(initiatorProperty.lastChild);
+		while (traderProperty.lastChild) {
+			traderProperty.removeChild(traderProperty.lastChild);
 		}
 
-		while (recipientProperty.lastChild) {
-			recipientProperty.removeChild(recipientProperty.lastChild);
+		while (recieverProperty.lastChild) {
+			recieverProperty.removeChild(recieverProperty.lastChild);
 		}
 
-		var initiatorSideTable = document.createElement("table");
-		var recipientSideTable = document.createElement("table");
+		var traderSideTable = document.createElement("table");
+		var recieverSideTable = document.createElement("table");
 
 
 		for (var i = 0; i < 40; i++) {
@@ -544,23 +456,23 @@ function Game() {
 				continue;
 			}
 
-			allGroupUninproved = true;
+			Unimproved = true;
 			var max = currentSquare.group.length;
 			for (var j = 0; j < max; j++) {
 
 				if (square[currentSquare.group[j]].house > 0) {
-					allGroupUninproved = false;
+					Unimproved = false;
 					break;
 				}
 			}
 
-			if (!allGroupUninproved) {
+			if (!Unimproved) {
 				continue;
 			}
 
 			// Offered properties.
-			if (currentSquare.owner === initiator.index) {
-				currentTableRow = initiatorSideTable.appendChild(document.createElement("tr"));
+			if (currentSquare.owner === trader.index) {
+				currentTableRow = traderSideTable.appendChild(document.createElement("tr"));
 				currentTableRow.onclick = tableRowOnClick;
 
 				currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -574,9 +486,10 @@ function Game() {
 				currentTableCell.className = "propertycellcolor";
 				currentTableCell.style.backgroundColor = currentSquare.color;
 
-				if (currentSquare.groupNum == 1 || currentSquare.groupNum == 2) {
+				if (currentSquare.groupNum === 1 || currentSquare.groupNum === 2) {
 					currentTableCell.style.borderColor = "grey";
-				} else {
+				}
+				else {
 					currentTableCell.style.borderColor = currentSquare.color;
 				}
 
@@ -593,8 +506,8 @@ function Game() {
 				currentTableCell.textContent = currentSquare.name;
 
 			// Requested properties.
-			} else if (currentSquare.owner === recipient.index) {
-				currentTableRow = recipientSideTable.appendChild(document.createElement("tr"));
+			} else if (currentSquare.owner === reciever.index) {
+				currentTableRow = recieverSideTable.appendChild(document.createElement("tr"));
 				currentTableRow.onclick = tableRowOnClick;
 
 				currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -608,7 +521,7 @@ function Game() {
 				currentTableCell.className = "propertycellcolor";
 				currentTableCell.style.backgroundColor = currentSquare.color;
 
-				if (currentSquare.groupNum == 1 || currentSquare.groupNum == 2) {
+				if (currentSquare.groupNum === 1 || currentSquare.groupNum === 2) {
 					currentTableCell.style.borderColor = "grey";
 				} else {
 					currentTableCell.style.borderColor = currentSquare.color;
@@ -628,8 +541,8 @@ function Game() {
 			}
 		}
 
-		if (initiator.communityChestJailCard) {
-			currentTableRow = initiatorSideTable.appendChild(document.createElement("tr"));
+		if (trader.communityChestJailCard) {
+			currentTableRow = traderSideTable.appendChild(document.createElement("tr"));
 			currentTableRow.onclick = tableRowOnClick;
 
 			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -648,8 +561,9 @@ function Game() {
 			currentTableCell.className = "propertycellname";
 
 			currentTableCell.textContent = "Get Out of Jail Free Card";
-		} else if (recipient.communityChestJailCard) {
-			currentTableRow = recipientSideTable.appendChild(document.createElement("tr"));
+		}
+		else if (reciever.communityChestJailCard) {
+			currentTableRow = recieverSideTable.appendChild(document.createElement("tr"));
 			currentTableRow.onclick = tableRowOnClick;
 
 			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -670,8 +584,8 @@ function Game() {
 			currentTableCell.textContent = "Get Out of Jail Free Card";
 		}
 
-		if (initiator.chanceJailCard) {
-			currentTableRow = initiatorSideTable.appendChild(document.createElement("tr"));
+		if (trader.chanceJailCard) {
+			currentTableRow = traderSideTable.appendChild(document.createElement("tr"));
 			currentTableRow.onclick = tableRowOnClick;
 
 			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -690,8 +604,9 @@ function Game() {
 			currentTableCell.className = "propertycellname";
 
 			currentTableCell.textContent = "Get Out of Jail Free Card";
-		} else if (recipient.chanceJailCard) {
-			currentTableRow = recipientSideTable.appendChild(document.createElement("tr"));
+		}
+		else if (reciever.chanceJailCard) {
+			currentTableRow = recieverSideTable.appendChild(document.createElement("tr"));
 			currentTableRow.onclick = tableRowOnClick;
 
 			currentTableCell = currentTableRow.appendChild(document.createElement("td"));
@@ -712,23 +627,24 @@ function Game() {
 			currentTableCell.textContent = "Get Out of Jail Free Card";
 		}
 
-		if (initiatorSideTable.lastChild) {
-			initiatorProperty.appendChild(initiatorSideTable);
-		} else {
-			initiatorProperty.textContent = initiator.name + " has no properties to trade.";
+		if (traderSideTable.lastChild) {
+			traderProperty.appendChild(traderSideTable);
+		}
+		else {
+			traderProperty.textContent = trader.name + " has no properties to trade.";
 		}
 
-		if (recipientSideTable.lastChild) {
-			recipientProperty.appendChild(recipientSideTable);
+		if (recieverSideTable.lastChild) {
+			recieverProperty.appendChild(recieverSideTable);
 		} else {
-			recipientProperty.textContent = recipient.name + " has no properties to trade.";
+			recieverProperty.textContent = reciever.name + " has no properties to trade.";
 		}
 
-		document.getElementById("trade-leftp-name").textContent = initiator.name;
+		document.getElementById("trade-leftp-name").textContent = trader.name;
 
 		currentName = document.getElementById("trade-rightp-name");
 
-		if (allowRecipientToBeChanged && pcount > 2) {
+		if (allowRecieverToBeChanged && pcount > 2) {
 			// Empty element.
 			while (currentName.lastChild) {
 				currentName.removeChild(currentName.lastChild);
@@ -736,7 +652,7 @@ function Game() {
 
 			nameSelect = currentName.appendChild(document.createElement("select"));
 			for (var i = 1; i <= pcount; i++) {
-				if (i === initiator.index) {
+				if (i === trader.index) {
 					continue;
 				}
 
@@ -745,18 +661,18 @@ function Game() {
 				currentOption.style.color = player[i].color;
 				currentOption.textContent = player[i].name;
 
-				if (i === recipient.index) {
+				if (i === trader.index) {
 					currentOption.selected = "selected";
 				}
 			}
 
 			nameSelect.onchange = function() {
-				resetTrade(currentInitiator, player[parseInt(this.value, 10)], true);
+				resetTrade(currentTrader, player[parseInt(this.value, 10)], true);
 			};
 
 			nameSelect.title = "Select a player to trade with.";
 		} else {
-			currentName.textContent = recipient.name;
+			currentName.textContent = reciever.name;
 		}
 
 		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
@@ -767,8 +683,8 @@ function Game() {
 	};
 
 	var readTrade = function() {
-		var initiator = currentInitiator;
-		var recipient = currentRecipient;
+		var trader = currentTrader;
+		var reciever = currentReciever;
 		var property = new Array(40);
 		var money;
 		var communityChestJailCard;
@@ -782,33 +698,39 @@ function Game() {
 			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
 			if (tradeleftcheckbox && tradeleftcheckbox.checked) {
 				property[i] = 1;
-			} else if (traderightcheckbox && traderightcheckbox.checked) {
+			}
+			else if (traderightcheckbox && traderightcheckbox.checked) {
 				property[i] = -1;
-			} else {
+			}
+			else {
 				property[i] = 0;
 			}
 		}
 
 		if (communitychestleftcheckbox && communitychestleftcheckbox.checked) {
 			communityChestJailCard = 1;
-		} else if (communitychestrightcheckbox && communitychestrightcheckbox.checked) {
+		}
+		else if (communitychestrightcheckbox && communitychestrightcheckbox.checked) {
 			communityChestJailCard = -1;
-		} else {
+		}
+		else {
 			communityChestJailCard = 0;
 		}
 
 		if (chanceleftcheckbox && chanceleftcheckbox.checked) {
 			chanceJailCard = 1;
-		} else if (chancerightcheckbox && chancerightcheckbox.checked) {
+		}
+		else if (chancerightcheckbox && chancerightcheckbox.checked) {
 			chanceJailCard = -1;
-		} else {
+		}
+		else {
 			chanceJailCard = 0;
 		}
 
 		money = parseInt(document.getElementById("trade-leftp-money").value, 10) || 0;
 		money -= parseInt(document.getElementById("trade-rightp-money").value, 10) || 0;
 
-		var trade = new Trade(initiator, recipient, money, property, communityChestJailCard, chanceJailCard);
+		var trade = new Trade(trader, reciever, money, property, communityChestJailCard, chanceJailCard);
 
 		return trade;
 	};
@@ -820,64 +742,44 @@ function Game() {
 		var chancerightcheckbox = document.getElementById("traderightcheckbox41")
 		var tradeleftplayermoney = document.getElementById("trade-leftp-money")
 		var traderightplayermoney = document.getElementById("trade-rightp-money")
-		resetTrade(tradeObj.getInitiator(), tradeObj.getRecipient(), false);
+
+		resetTrade(tradeObj.getTrader(), tradeObj.getReciever(), false);
 
 		for (var i = 0; i < 40; i++) {
 			var tradeleftcheckbox = document.getElementById("tradeleftcheckbox" + i)
 			var traderightcheckbox = document.getElementById("traderightcheckbox" + i)
+
 			if (tradeleftcheckbox) {
-				tradeleftcheckbox.checked = false;
-				if (tradeObj.getProperty(i) === 1) {
-					tradeleftcheckbox.checked = true;
-				}
+				tradeleftcheckbox.checked = tradeObj.getProperty(i) === 1;
 			}
 
 			if (traderightcheckbox) {
-				traderightcheckbox.checked = false;
-				if (tradeObj.getProperty(i) === -1) {
-					traderightcheckbox.checked = true;
-				}
+				traderightcheckbox.checked = tradeObj.getProperty(i) === -1;
 			}
 		}
 
 		if (communitychestleftcheckbox) {
-			if (tradeObj.getCommunityChestJailCard() === 1) {
-				communitychestleftcheckbox.checked = true;
-			} else {
-				communitychestleftcheckbox.checked = false;
-			}
+			communitychestleftcheckbox.checked = tradeObj.getCommunityChestJailCard() === 1;
 		}
 
 		if (communitychestrightcheckbox) {
-			if (tradeObj.getCommunityChestJailCard() === -1) {
-				communitychestrightcheckbox.checked = true;
-			} else {
-				communitychestrightcheckbox.checked = false;
-			}
+			communitychestrightcheckbox.checked = tradeObj.getCommunityChestJailCard() === -1;
 		}
 
 		if (chanceleftcheckbox) {
-			if (tradeObj.getChanceJailCard() === 1) {
-				chanceleftcheckbox.checked = true;
-			} else {
-				chanceleftcheckbox.checked = false;
-			}
+			chanceleftcheckbox.checked = tradeObj.getChanceJailCard() === 1;
 		}
 
 		if (chancerightcheckbox) {
-			if (tradeObj.getChanceJailCard() === -1) {
-				chancerightcheckbox.checked = true;
-			} else {
-				chancerightcheckbox.checked = false;
-			}
+			chancerightcheckbox.checked = tradeObj.getChanceJailCard() === -1;
 		}
 
 		if (tradeObj.getMoney() > 0) {
 			tradeleftplayermoney.value = tradeObj.getMoney() + "";
-		} else {
+		}
+		else {
 			traderightplayermoney.value = (-tradeObj.getMoney()) + "";
 		}
-
 	};
 
 	this.trade = function(tradeObj) {
@@ -893,13 +795,13 @@ function Game() {
 			writeTrade(tradeObj);
 			this.proposeTrade();
 		} else {
-			var initiator = player[turn];
-			var recipient = turn === 1 ? player[2] : player[1];
+			var trader = player[turn];
+			var reciever = turn === 1 ? player[2] : player[1];
 
-			currentInitiator = initiator;
-			currentRecipient = recipient;
+			currentTrader = trader;
+			currentReciever = reciever;
 
-			resetTrade(initiator, recipient, true);
+			resetTrade(trader, reciever, true);
 		}
 	};
 
@@ -935,8 +837,8 @@ function Game() {
 
 		var showAlerts = true;
 		var money;
-		var initiator;
-		var recipient;
+		var trader;
+		var reciever;
 
 		if (tradeObj) {
 			showAlerts = false;
@@ -945,16 +847,16 @@ function Game() {
 		}
 
 		money = tradeObj.getMoney();
-		initiator = tradeObj.getInitiator();
-		recipient = tradeObj.getRecipient();
+		trader = tradeObj.getTrader();
+		reciever = tradeObj.getReciever();
 
 
-		if (money > 0 && money > initiator.money) {
-			tradeleftplayermoney.value = initiator.name + " does not have $" + money + ".";
+		if (money > 0 && money > trader.money) {
+			tradeleftplayermoney.value = trader.name + " does not have $" + money + ".";
 			tradeleftplayermoney.style.color = "red";
 			return false;
-		} else if (money < 0 && -money > recipient.money) {
-			traderightplayermoney.value = recipient.name + " does not have $" + (-money) + ".";
+		} else if (money < 0 && -money > reciever.money) {
+			traderightplayermoney.value = reciever.name + " does not have $" + (-money) + ".";
 			traderightplayermoney.style.color = "red";
 			return false;
 		}
@@ -975,7 +877,7 @@ function Game() {
 			return false;
 		}
 
-		if (showAlerts && !confirm(initiator.name + ", are you sure you want to make this exchange with " + recipient.name + "?")) {
+		if (showAlerts && !confirm(trader.name + ", are you sure you want to make this exchange with " + reciever.name + "?")) {
 			return false;
 		}
 
@@ -983,48 +885,48 @@ function Game() {
 		for (var i = 0; i < 40; i++) {
 
 			if (tradeObj.getProperty(i) === 1) {
-				square[i].owner = recipient.index;
-				addAlert(recipient.name + " received " + square[i].name + " from " + initiator.name + ".");
+				square[i].owner = reciever.index;
+				addAlert(reciever.name + " received " + square[i].name + " from " + trader.name + ".");
 			} else if (tradeObj.getProperty(i) === -1) {
-				square[i].owner = initiator.index;
-				addAlert(initiator.name + " received " + square[i].name + " from " + recipient.name + ".");
+				square[i].owner = trader.index;
+				addAlert(trader.name + " received " + square[i].name + " from " + reciever.name + ".");
 			}
 
 		}
 
 		if (tradeObj.getCommunityChestJailCard() === 1) {
-			initiator.communityChestJailCard = false;
-			recipient.communityChestJailCard = true;
-			addAlert(recipient.name + ' received a "Get Out of Jail Free" card from ' + initiator.name + ".");
+			trader.communityChestJailCard = false;
+			reciever.communityChestJailCard = true;
+			addAlert(reciever.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
 		} else if (tradeObj.getCommunityChestJailCard() === -1) {
-			initiator.communityChestJailCard = true;
-			recipient.communityChestJailCard = false;
-			addAlert(initiator.name + ' received a "Get Out of Jail Free" card from ' + recipient.name + ".");
+			trader.communityChestJailCard = true;
+			reciever.communityChestJailCard = false;
+			addAlert(trader.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
 		}
 
 		if (tradeObj.getChanceJailCard() === 1) {
-			initiator.chanceJailCard = false;
-			recipient.chanceJailCard = true;
-			addAlert(recipient.name + ' received a "Get Out of Jail Free" card from ' + initiator.name + ".");
+			trader.chanceJailCard = false;
+			reciever.chanceJailCard = true;
+			addAlert(reciever.name + ' received a "Get Out of Jail Free" card from ' + trader.name + ".");
 		} else if (tradeObj.getChanceJailCard() === -1) {
-			initiator.chanceJailCard = true;
-			recipient.chanceJailCard = false;
-			addAlert(initiator.name + ' received a "Get Out of Jail Free" card from ' + recipient.name + ".");
+			trader.chanceJailCard = true;
+			reciever.chanceJailCard = false;
+			addAlert(trader.name + ' received a "Get Out of Jail Free" card from ' + reciever.name + ".");
 		}
 
 		// Exchange money.
 		if (money > 0) {
-			initiator.pay(money, recipient.index);
-			recipient.money += money;
+			trader.pay(money, reciever.index);
+			reciever.money += money;
 
-			addAlert(recipient.name + " received $" + money + " from " + initiator.name + ".");
+			addAlert(reciever.name + " received $" + money + " from " + trader.name + ".");
 		} else if (money < 0) {
 			money = -money;
 
-			recipient.pay(money, initiator.index);
-			initiator.money += money;
+			reciever.pay(money, trader.index);
+			reciever.money += money;
 
-			addAlert(initiator.name + " received $" + money + " from " + recipient.name + ".");
+			addAlert(trader.name + " received $" + money + " from " + reciever.name + ".");
 		}
 
 		updateOwned();
@@ -1058,16 +960,17 @@ function Game() {
 
 		var tradeObj = readTrade();
 		var money = tradeObj.getMoney();
-		var initiator = tradeObj.getInitiator();
-		var recipient = tradeObj.getRecipient();
+		var trader = tradeObj.getTrader();
+		var reciever = tradeObj.getReciever();
 		var reversedTradeProperty = [];
 
-		if (money > 0 && money > initiator.money) {
-			tradeleftplayermoney.value = initiator.name + " does not have $" + money + ".";
+		if (money > 0 && money > trader.money) {
+			tradeleftplayermoney.value = trader.name + " does not have $" + money + ".";
 			tradeleftplayermoney.style.color = "red";
 			return false;
-		} else if (money < 0 && -money > recipient.money) {
-			traderightplayermoney.value = recipient.name + " does not have $" + (-money) + ".";
+		}
+		else if (money < 0 && -money > reciever.money) {
+			traderightplayermoney.value = reciever.name + " does not have $" + (-money) + ".";
 			traderightplayermoney.style.color = "red";
 			return false;
 		}
@@ -1089,13 +992,13 @@ function Game() {
 			return false;
 		}
 
-		if (initiator.human && !confirm(initiator.name + ", are you sure you want to make this offer to " + recipient.name + "?")) {
+		if (trader.human && !confirm(trader.name + ", are you sure you want to make this offer to " + reciever.name + "?")) {
 			return false;
 		}
 
-		var reversedTrade = new Trade(recipient, initiator, -money, reversedTradeProperty, -tradeObj.getCommunityChestJailCard(), -tradeObj.getChanceJailCard());
+		var reversedTrade = new Trade(reciever, trader, -money, reversedTradeProperty, -tradeObj.getCommunityChestJailCard(), -tradeObj.getChanceJailCard());
 
-		if (recipient.human) {
+		if (reciever.human) {
 
 			writeTrade(reversedTrade);
 
@@ -1104,19 +1007,19 @@ function Game() {
 			$("#accepttradebutton").show();
 			$("#rejecttradebutton").show();
 
-			addAlert(initiator.name + " initiated a trade with " + recipient.name + ".");
-			popup("<p>" + initiator.name + " has proposed a trade with you, " + recipient.name + ". You may accept, reject, or modify the offer.</p>");
+			addAlert(trader.name + " initiated a trade with " + reciever.name + ".");
+			popup("<p>" + trader.name + " has proposed a trade with you, " + reciever.name + ". You may accept, reject, or modify the offer.</p>");
 		} else {
-			var tradeResponse = recipient.AI.acceptTrade(tradeObj);
+			var tradeResponse = reciever.AI.acceptTrade(tradeObj);
 
 			if (tradeResponse === true) {
-				popup("<p>" + recipient.name + " has accepted your offer.</p>");
+				popup("<p>" + reciever.name + " has accepted your offer.</p>");
 				this.acceptTrade(reversedTrade);
 			} else if (tradeResponse === false) {
-				popup("<p>" + recipient.name + " has declined your offer.</p>");
+				popup("<p>" + reciever.name + " has declined your offer.</p>");
 				return;
 			} else if (tradeResponse instanceof Trade) {
-				popup("<p>" + recipient.name + " has proposed a counteroffer.</p>");
+				popup("<p>" + reciever.name + " has proposed a counteroffer.</p>");
 				writeTrade(tradeResponse);
 
 				$("#proposetradebutton, #canceltradebutton").hide();
@@ -1308,14 +1211,14 @@ function Player(name, color) {
 }
 
 // Trade function which defines the initaitor of the trade, recipient of the trade, amount of money to trade and what properties etc.
-function Trade(initiator, recipient, money, property, communityChestJailCard, chanceJailCard) {
+function Trade(trader, reciever, money, property, communityChestJailCard, chanceJailCard) {
 
-	this.getInitiator = function() {
-		return initiator;
+	this.getTrader = function() {
+		return trader;
 	};
 
-	this.getRecipient = function() {
-		return recipient;
+	this.getReciever = function() {
+		return reciever;
 	};
 
 	this.getProperty = function(index) {
@@ -1530,8 +1433,8 @@ function updateMoney() {
 }
 // updates dice after every roll
 function updateDice() {
-	var die0 = game.getDie(1);
-	var die1 = game.getDie(2);
+	var dice0 = game.getDice(1);
+	var dice1 = game.getDice(2);
 
 	$("#die0").show();
 	$("#die1").show();
@@ -1543,8 +1446,8 @@ function updateDice() {
 		element0.classList.remove("die-no-img");
 		element1.classList.remove("die-no-img");
 
-		element0.title = "Die (" + die0 + " spots)";
-		element1.title = "Die (" + die1 + " spots)";
+		element0.title = "Die (" + dice0 + " spots)";
+		element1.title = "Die (" + dice1 + " spots)";
 
 		if (element0.firstChild) {
 			element0 = element0.firstChild;
@@ -1552,8 +1455,8 @@ function updateDice() {
 			element0 = element0.appendChild(document.createElement("img"));
 		}
 
-		element0.src = "/static/images/Die_" + die0 + ".png";
-		element0.alt = die0;
+		element0.src = "/static/images/Die_" + dice0 + ".png";
+		element0.alt = dice0;
 
 		if (element1.firstChild) {
 			element1 = element1.firstChild;
@@ -1561,16 +1464,17 @@ function updateDice() {
 			element1 = element1.appendChild(document.createElement("img"));
 		}
 
-		element1.src = "static/images/Die_" + die1 + ".png";
-		element1.alt = die0;
+		element1.src = "static/images/Die_" + dice1 + ".png";
+		element1.alt = dice0;
 	} else {
-		document.getElementById("die0").textContent = die0;
-		document.getElementById("die1").textContent = die1;
+		document.getElementById("die0").textContent = dice0;
+		document.getElementById("die1").textContent = dice1;
 
-		document.getElementById("die0").title = "Die";
-		document.getElementById("die1").title = "Die";
+		document.getElementById("die0").title = "Dice";
+		document.getElementById("die1").title = "Dice";
 	}
 }
+
 // update the properties to the players who own them when bought
 function updateOwned() {
 	var p = player[turn];
@@ -2418,8 +2322,8 @@ function land(increasedRent) {
 	var p = player[turn];
 	var s = square[p.position];
 
-	var die1 = game.getDie(1);
-	var die2 = game.getDie(2);
+	var dice1 = game.getDice(1);
+	var dice2 = game.getDice(2);
 
 	$("#landed").show();
 	document.getElementById("landed").innerHTML = "You landed on " + s.name + ".";
@@ -2470,16 +2374,16 @@ function land(increasedRent) {
 
 		} else if (p.position === 12) {
 			if (increasedRent || square[28].owner == s.owner) {
-				rent = (die1 + die2) * 10;
+				rent = (dice1 + dice2) * 10;
 			} else {
-				rent = (die1 + die2) * 4;
+				rent = (dice1 + dice2) * 4;
 			}
 
 		} else if (p.position === 28) {
 			if (increasedRent || square[12].owner == s.owner) {
-				rent = (die1 + die2) * 10;
+				rent = (dice1 + dice2) * 10;
 			} else {
-				rent = (die1 + die2) * 4;
+				rent = (dice1 + dice2) * 4;
 			}
 
 		} else {
@@ -2561,19 +2465,19 @@ function roll() {
 	document.getElementById("nextbutton").title = "End turn and advance to the next player.";
 
 	game.rollDice();
-	var die1 = game.getDie(1);
-	var die2 = game.getDie(2);
+	var dice1 = game.getDice(1);
+	var dice2 = game.getDice(2);
 
 	doublecount++;
 
-	if (die1 == die2) {
-		addAlert(p.name + " rolled " + (die1 + die2) + " - doubles.");
+	if (dice1 == dice2) {
+		addAlert(p.name + " rolled " + (dice1 + dice2) + " - doubles.");
 	} else {
-		addAlert(p.name + " rolled " + (die1 + die2) + ".");
+		addAlert(p.name + " rolled " + (dice1 + dice2) + ".");
 	}
 
-	if (die1 == die2 && !p.jail) {
-		updateDice(die1, die2);
+	if (dice1 == dice2 && !p.jail) {
+		updateDice(dice1, dice2);
 
 		if (doublecount < 3) {
 			document.getElementById("nextbutton").value = "Roll again";
@@ -2608,15 +2512,15 @@ function roll() {
 	if (p.jail === true) {
 		p.jailroll++;
 
-		updateDice(die1, die2);
-		if (die1 == die2) {
+		updateDice(dice1, dice2);
+		if (dice1 == dice2) {
 			document.getElementById("jail").style.border = "1px solid black";
 			document.getElementById("cell11").style.border = "2px solid " + p.color;
 			$("#landed").hide();
 
 			p.jail = false;
 			p.jailroll = 0;
-			p.position = 10 + die1 + die2;
+			p.position = 10 + dice1 + dice2;
 			doublecount = 0;
 
 			addAlert(p.name + " rolled doubles to get out of jail.");
@@ -2628,12 +2532,12 @@ function roll() {
 				if (p.human) {
 					popup("<p>You must pay the $50 fine.</p>", function() {
 						payfifty();
-						player[turn].position=10 + die1 + die2;
+						player[turn].position=10 + dice1 + dice2;
 						land();
 					});
 				} else {
 					payfifty();
-					p.position = 10 + die1 + die2;
+					p.position = 10 + dice1 + dice2;
 					land();
 				}
 			} else {
@@ -2649,10 +2553,10 @@ function roll() {
 
 
 	} else {
-		updateDice(die1, die2);
+		updateDice(dice1, dice2);
 
 		// Move player
-		p.position += die1 + die2;
+		p.position += dice1 + dice2;
 
 		// Collect $200 salary as you pass GO
 		if (p.position >= 40) {
