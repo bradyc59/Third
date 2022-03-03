@@ -198,35 +198,33 @@ function Game() {
 
 
 
-	// Auction functions:
-
-
+	// sets p to the highest bidder and sq to the property thats being auctioned
 	var finalizeAuction = function() {
 		var p = player[highestbidder];
 		var sq = square[auctionproperty];
-
+		// if highest bid is greater than 0
 		if (highestbid > 0) {
 			p.pay(highestbid, 0);
 			sq.owner = highestbidder;
 			addAlert(p.name + " bought " + sq.name + " for $" + highestbid + ".");
 		}
-
+		// for every player in game, let them bid
 		for (var i = 1; i <= pcount; i++) {
 			player[i].bidding = true;
 		}
 
 		$("#popupbackground").hide();
 		$("#popupwrap").hide();
-
+		// if there is no auction, continue playing the game
 		if (!game.auction()) {
 			play();
 		}
 	};
-
+	// add a property to auction queue, done when player gone bankrupt.
 	this.addPropertyToAuctionQueue = function(propertyIndex) {
 		auctionQueue.push(propertyIndex);
 	};
-
+	// when auction queue is equal to 0, return false
 	this.auction = function() {
 		if (auctionQueue.length === 0) {
 			return false;
@@ -235,38 +233,38 @@ function Game() {
 		index = auctionQueue.shift();
 
 		var s = square[index];
-
+		// if the price bid for property is 0 now the owner does not equal 0, place the property for auction
 		if (s.price === 0 || s.owner !== 0) {
 			return game.auction();
 		}
-
+	
 		auctionproperty = index;
 		highestbidder = 0;
 		highestbid = 0;
 		currentbidder = turn + 1;
-
+		// if the current bidder is greater that the player count
 		if (currentbidder > pcount) {
 			currentbidder -= pcount;
 		}
 
 		popup("<div style='font-weight: bold; font-size: 16px; margin-bottom: 10px;'>Auction <span id='propertyname'></span></div><div>Highest Bid = $<span id='highestbid'></span> (<span id='highestbidder'></span>)</div><div><span id='currentbidder'></span>, it is your turn to bid.</div<div><input id='bid' title='Enter an amount to bid on " + s.name + ".' style='width: 291px;' /></div><div><input type='button' value='Bid' onclick='game.auctionBid();' title='Place your bid.' /><input type='button' value='Pass' title='Skip bidding this time.' onclick='game.auctionPass();' /><input type='button' value='Exit Auction' title='Stop bidding on " + s.name + " altogether.' onclick='if (confirm(\"Are you sure you want to stop bidding on this property altogether?\")) game.auctionExit();' /></div>", "blank");
-
+		// get the property name
 		var auctionpropertyname = document.getElementById("propertyname")
 
 		auctionpropertyname.innerHTML= "<a href='javascript:void(0);' onmouseover='showdeed(" + auctionproperty + ");' onmouseout='hidedeed();' class='statscellcolor'>" + s.name + "</a>";
-
+		// get the current highest bid
 		var highestcurrentbid = document.getElementById("highestbid")
 
 		highestcurrentbid.innerHTML = "0";
-
+		// get the highest bidder
 		var highestplayerbidder = document.getElementById("highestbidder")
 
 		highestplayerbidder.innerHTML = "N/A";
-
+		// get the current players bid
 		var currentplayerbidder = document.getElementById("currrentbidder")
 
-		currentplayerbidder.innerHTML = player[currentbidder].name
-
+		currentplayerbidder.innerHTML = player[currentbidder].name;
+		// get the current bid
 		var bidelement = document.getElementById("bid")
 
 		bidelement.onkeydown = function (e) {
@@ -283,11 +281,11 @@ function Game() {
 				isCtrl = e.ctrlKey;
 				isShift = e.shiftKey;
 			}
-
+			// if it is not a number, return true
 			if (isNaN(key)) {
 				return true;
 			}
-
+			// if the user presses enter, submit their auction bid
 			if (key === 13) {
 				game.auctionBid();
 				return false;
@@ -302,7 +300,7 @@ function Game() {
 				return false;
 			}
 
-			// Only allow number keys.
+			// Only allow number keys to be entered.
 			return (key >= 48 && key <= 57) || (key >= 96 && key <= 105);
 		};
 
@@ -314,45 +312,47 @@ function Game() {
 		};
 
 		updateMoney();
-
+		// the current bidder in not a human player
 		if (!player[currentbidder].human) {
-			currentbidder = turn; // auctionPass advances currentbidder.
+			currentbidder = turn;
 			this.auctionPass();
 		}
 		return true;
 	};
 
 	this.auctionPass = function() {
+		// if highest bidder is equal to 0, highest bidder is equal to current bidder
 		if (highestbidder === 0) {
 			highestbidder = currentbidder;
 		}
-
+		// while this statement is true, increment current bidder by 1
 		while (true) {
 			currentbidder++;
 
 			if (currentbidder > pcount) {
 				currentbidder -= pcount;
 			}
-
+			// if current bidder is equal to highest bidder, finalize the auction
 			if (currentbidder == highestbidder) {
 				finalizeAuction();
 				return;
-			} else if (player[currentbidder].bidding) {
+			} // if the current player is bidding 
+			else if (player[currentbidder].bidding) {
 				var p = player[currentbidder];
-
+				// if the player is not a human player, let AI bid
 				if (!p.human) {
 					var bid = p.AI.bid(auctionproperty, highestbid);
-
+					// if highest bid is more than players money, exit auction
 					if (bid === -1 || highestbid >= p.money) {
 						p.bidding = false;
 
 						window.alert(p.name + " exited the auction.");
 						continue;
-
+						// if player chooses to pass this round of bidding, pass
 					} else if (bid === 0) {
 						window.alert(p.name + " passed.");
 						continue;
-
+						// if player wishes to bid, they bid
 					} else if (bid > 0) {
 						this.auctionBid(bid);
 						window.alert(p.name + " bid $" + bid + ".");
@@ -365,69 +365,72 @@ function Game() {
 			}
 
 		}
+		// get current players bid
 		var currentplayerbidder = document.getElementById("currentbidder")
 		currentplayerbidder.innerHTML = player[currentbidder].name
+		// get the current bid
 		var bidelement = document.getElementById("bid")
 		bidelement.value = "";
 		bidelement.style.color = "black";
 	};
-
+	// getting the actual bid for the property
 	this.auctionBid = function(bid) {
+		// get the current bid
 		var bidelement = document.getElementById("bid")
+		// get the current highest bidder
 		var highestplayerbidder = document.getElementById("highestbidder")
+		// get the current highest bid
 		var highestcurrentbid = document.getElementById("highestbid")
 
 		bid = bid || parseInt(document.getElementById("bid").value, 10);
-
+		// if bid is empty, tell user to enter a bid
 		if (bid === "" || bid === null) {
 			bidelement.value = "Please enter a bid.";
 			bidelement.style.color = "red";
-		} else if (isNaN(bid)) {
+		} // if bid is not a number, tell user to enter a number
+		else if (isNaN(bid)) {
 			bidelement.value = "Your bid must be a number.";
 			bidelement.style.color = "red";
 		} else {
-
+			// if the user has bid more than their balance, tell user they can bid that much
 			if (bid > player[currentbidder].money) {
 				bidelement.value = "You don't have enough money to bid $" + bid + ".";
 				bidelement.style.color = "red";
-			} else if (bid > highestbid) {
+			} // if users bid is higher than current bid, have them as new highest bidder 
+			else if (bid > highestbid) {
 				highestbid = bid;
 				highestcurrentbid.innerHTML = parseInt(bid, 10);
 				highestbidder = currentbidder;
 				highestplayerbidder.innerHTML = player[highestbidder].name;
 
 				bidelement.focus();
-
+				// if they are current highest bidder, pass them through the round
 				if (player[currentbidder].human) {
 					this.auctionPass();
 				}
 			} else {
+				// if user input bid smaller than current bid
 				bidelement.value = "Your bid must be greater than highest bid. ($" + highestbid + ")";
 				bidelement.style.color = "red";
 			}
 		}
 	};
-
+	// exit auction
 	this.auctionExit = function() {
 		player[currentbidder].bidding = false;
 		this.auctionPass();
 	};
 
 
-	// Trade functions:
-
-
-
 	var currentInitiator;
 	var currentRecipient;
 
-	// Define event handlers:
 
 	var tradeMoneyOnKeyDown = function (e) {
 		var key = 0;
 		var isCtrl = false;
 		var isShift = false;
-
+		// if the window event is key, Ctrl, Shift
 		if (window.event) {
 			key = window.event.keyCode;
 			isCtrl = window.event.ctrlKey;
