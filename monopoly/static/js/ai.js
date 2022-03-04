@@ -23,43 +23,6 @@ function AI(p) {
 
 	}
 
-	// Determine the response to an offered trade.
-	// Return: boolean/instanceof Trade: a valid Trade object to counter offer (with the AI as the recipient); false to decline; true to accept.
-	// Arguments:
-	// tradeObj: the proposed trade, an instanceof Trade, has the AI as the recipient.
-	this.acceptTrade = function(tradeObj) {
-		console.log("acceptTrade");
-
-		var tradeValue = 0;
-		var money = tradeObj.getMoney();
-		var initiator = tradeObj.getInitiator();
-		var recipient = tradeObj.getRecipient();
-		var property = [];
-
-		tradeValue += 10 * tradeObj.getCommunityChestJailCard();
-		tradeValue += 10 * tradeObj.getChanceJailCard();
-
-		tradeValue += money;
-
-		for (var i = 0; i < 40; i++) {
-			property[i] = tradeObj.getProperty(i);
-			tradeValue += tradeObj.getProperty(i) * square[i].price * (square[i].mortgage ? 0.5 : 1);
-		}
-
-		console.log(tradeValue);
-
-		var proposedMoney = 25 - tradeValue + money;
-
-		if (tradeValue > 25) {
-			return true;
-		} else if (tradeValue >= -50 && initiator.money > proposedMoney) {
-
-			return new Trade(initiator, recipient, proposedMoney, property, tradeObj.getCommunityChestJailCard(), tradeObj.getChanceJailCard());
-		}
-
-		return false;
-	}
-
 	// This function is called at the beginning of the AI's turn, before any dice are rolled. The purpose is to allow the AI to manage property and/or initiate trades.
 	// Return: boolean: Must return true if and only if the AI proposed a trade.
 	this.beforeTurn = function() {

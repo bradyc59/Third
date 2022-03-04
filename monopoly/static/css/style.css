@@ -285,10 +285,7 @@ td {
 	width: 99%;
 	margin: 0px;
 	background-color: #305BC9;
-	/* background-image: -webkit-linear-gradient(bottom,#213EB2,#4787ED);
-	background-image: -moz-linear-gradient(bottom,#213EB2,#4787ED); */
 	background-image: url(static/images/menu_background.png);
-	/* background-repeat: repeat-x; */
 	overflow: hidden;
 }
 
@@ -352,19 +349,6 @@ td {
 #popuptext {
 	overflow-x: auto;
 }
-
-/* #popupclose {
-	display: none;
-	position: absolute;
-	top: -24px;
-	right: -25px;
-	width: 30px;
-	height: 30px;
-	border: none;
-	cursor: pointer;
-	overflow: visible;
-	z-index: 12;
-} */
 
 #popupclose input {
 	margin: 0px;
@@ -552,9 +536,6 @@ td {
 }
 
 .menu-item:hover {
-	/* background-image: -webkit-linear-gradient(bottom,#000080,#4787ED);
-	background-image: -moz-linear-gradient(bottom,#000080,#4787ED); */
-
 	background-image: url(images/menu_background_hover.png);
 }
 
